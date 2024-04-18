@@ -5,7 +5,7 @@ A generic python project template based on [`copier`](https://copier.readthedocs
 ## TL;DR
 
 ```bash
-copier copy git+https://github.com/twsl/python-project-template path/to/destination
+copier copy --trust git+https://github.com/twsl/python-project-template path/to/destination
 ```
 
 ## Features
@@ -50,7 +50,7 @@ pip install --upgrade copier
 Then, you can copy the template to your destination folder:
 
 ```bash
-copier copy git+https://github.com/twsl/python-project-template path/to/destination
+copier copy --trust git+https://github.com/twsl/python-project-template path/to/destination
 ```
 
 ### Update
@@ -58,7 +58,7 @@ copier copy git+https://github.com/twsl/python-project-template path/to/destinat
 You can update the template in your destination folder with:
 
 ```bash
-copier update path/to/destination
+copier update --trust path/to/destination
 ```
 
 ### Variables
