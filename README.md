@@ -33,7 +33,6 @@ copier copy --trust git+https://github.com/twsl/python-project-template path/to/
 
 ### Open source community features
 
-- .
 - Files such as: `LICENSE`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` are generated automatically.
 - [Semantic Versions](https://semver.org/) specification with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter).
 
