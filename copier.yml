@@ -209,7 +209,7 @@ include_copilot:
 github_runner_python_version:
   type: str
   help: Which Python versions do you want to use on your Github Runner?
-  default: "{{ python_version }}"
+  default: ["{{ python_version }}"]
   multiselect: true
   choices:
     - "3.8"
@@ -220,7 +220,7 @@ github_runner_python_version:
 
 github_runner:
   type: str
-  help: Which Python versions do you want to use on your Github Runner?
+  help: Which operating systems do you want to use on your Github Runner?
   default: [ubuntu-latest]
   multiselect: true
   choices:
