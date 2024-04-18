@@ -1,0 +1,32 @@
+---
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+{% if 'road-runner' in github_runner %}{% set github_runner = github_runner + [github_runner_onprem] %}{% endif %}
+jobs:
+  pre-commit:
+    name: pre-commit
+    strategy:
+      fail-fast: true
+{% if github_rate_limit %}
+      max-parallel: 1 # try to to avoid rate limiting
+{% endif %}
+      matrix:
+        python-version: {{ github_runner_python_version }}
+    runs-on: {{ github_runner }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+{% raw %}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+{% endraw %}
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1

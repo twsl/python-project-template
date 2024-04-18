@@ -1,0 +1,270 @@
+# CONFIGURATION -------------------------
+_min_copier_version: "9.1.0" # Earliest version with "multiselect" support.
+
+_envops:
+  autoescape: false
+  keep_trailing_newline: true
+
+_subdirectory: project
+
+_templates_suffix: .jinja
+
+_skip_if_exists:
+  # - README.md # overwrite README.md
+  - LICENSE.md
+  - .gitignore
+
+_jinja_extensions:
+  - copier_templates_extensions.TemplateExtensionLoader
+
+_message_before_copy: |
+  Thanks for generating a project using this template.
+
+_message_after_copy: |
+  Your project "{{ project_name }}" has been created successfully!
+
+# PROMPTS --------------------------------
+custom_install:
+  help: Would you like to use simple (default tooling) or customized installation?
+  type: bool
+  default: customized
+  choices:
+    customized: true
+    simple: false
+
+project_name:
+  type: str
+  help: What is the name of your project?
+  default: example_project
+  validator: >-
+    {% if not project_name %}
+    Project name is required.
+    {% elif not (project_name | regex_search('^[a-z][a-z0-9\_\-]+$')) %}
+    Must use a lowercase letter followed by one or more of (a-z, 0-9, _, -).
+    {% endif %}
+
+project_description:
+  type: str
+  help: What is your project description?
+  placeholder: "A Python package that ..."
+
+primary_branch:
+  type: str
+  help: What is your primary git branch?
+  default: main
+  when: "{{ custom_install }}"
+
+author_username:
+  type: str
+  help: What's your Github username?
+  validator: >-
+    {% if not (author_username | regex_search('^[a-zA-Z0-9][a-zA-Z0-9\-]*$')) %}
+    The name may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.
+    {% endif %}
+
+author_email:
+  type: str
+  help: What's the author's preferred github email address?
+  default: "{{ author_username }}@users.noreply.github.com"
+
+repository_provider:
+  type: str
+  help: Your Github repository provider instance?
+  default: github.com
+
+repository_namespace:
+  type: str
+  help: What's the repository namespace?
+  default: "{{ author_username }}"
+  validator: >-
+    {% if not (repository_namespace | regex_search('^[a-zA-Z0-9][a-zA-Z0-9\-]*$')) %}
+    The name may only contain alphanumeric characters or single hyphens, and cannot begin or end with a hyphen.
+    {% endif %}
+
+repository_name:
+  type: str
+  help: What's the repository name?
+  default: "{{ project_name|lower|replace('_', '-')|replace(' ', '-') }}"
+
+copyright_holder:
+  type: str
+  help: The name of the person/entity holding the copyright?
+  default: "{{ author_username }}"
+  when: "{{ custom_install }}"
+
+copyright_holder_email:
+  type: str
+  help: The email of the person/entity holding the copyright?
+  default: "{{ author_email }}"
+  when: "{{ custom_install }}"
+
+copyright_year:
+  type: int
+  help: The copyright year?
+  default: 2024
+  when: "{{ custom_install }}"
+
+copyright_license:
+  type: str
+  help: Which license do you want for the project?
+  default: MIT
+  choices:
+    MIT: MIT
+    GNU: GNU GPLv3
+    none: none
+  when: "{{ custom_install }}"
+
+# https://devguide.python.org/versions/
+python_version:
+  type: str
+  help: What version of python are you targeting?
+  default: "3.11"
+  choices:
+    - "3.8"
+    - "3.9"
+    - "3.10"
+    - "3.11"
+    - "3.12"
+
+python_package_distribution_name:
+  type: str
+  help: Your Python package distribution name (for `pip install NAME`)
+  default: "{{ project_name|lower|replace('_', '-')|replace(' ', '-') }}"
+  when: "{{ custom_install }}"
+
+python_package_import_name:
+  type: str
+  help: Your Python package import name (for `import NAME` in Python code)
+  default: "{{ project_name|lower|replace('-', '_')|replace(' ', '_') }}"
+  when: "{{ custom_install }}"
+
+python_package_command_line_name:
+  type: str
+  help: Your CLI name if any (for use in the shell)
+  default: "{{ project_name|lower|replace('_', '-')|replace(' ', '-') }}"
+  when: "{{ custom_install }}"
+
+line_ending:
+  type: str
+  help: Which line endings do you prefer?
+  default: lf
+  choices:
+    LF: lf
+    CLRF: crlf
+
+use_precommit:
+  type: bool
+  default: yes
+  help: Do you want to use pre-commit?
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"
+
+include_docs:
+  help: Do you want to include a source code documentation?
+  type: bool
+  default: yes
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"
+
+docs_library:
+  type: str
+  default: mkdocs
+  help: Which documentation library do you want to use?
+  choices:
+    - mkdocs
+    - sphinx
+  when: "{{ custom_install and include_docs }}"
+
+include_notebooks:
+  help: Do you want to include rendered notebooks in your documentation?
+  type: bool
+  default: "{{ include_docs }}"
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install and include_docs }}"
+
+include_databricks:
+  help: Do you want to include Databricks support?
+  type: bool
+  default: false
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"
+
+include_copilot:
+  help: Do you want use Github CoPilot?
+  type: bool
+  default: false
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"
+
+github_runner_python_version:
+  type: str
+  help: Which Python versions do you want to use on your Github Runner?
+  default: "{{ python_version }}"
+  multiselect: true
+  choices:
+    - "3.8"
+    - "3.9"
+    - "3.10"
+    - "3.11"
+    - "3.12"
+
+github_runner:
+  type: str
+  help: Which Python versions do you want to use on your Github Runner?
+  default: [ubuntu-latest]
+  multiselect: true
+  choices:
+    Ubuntu: ubuntu-latest
+    Windows: windows-latest
+    MacOS: macos-latest
+    # self-hosted infra tags
+    SelfHosted: self-hosted
+    OnPrem: onprem
+    RoadRunner: road-runner
+
+github_runner_onprem:
+  type: str
+  help: Which additional tags do you want to add to your onprem runner?
+  when: "{{ 'road-runner' in github_runner }}"
+  default: small
+  choices:
+    Small: small
+    Medium: medium
+    Large: large
+
+github_rate_limit:
+  help: Do you want to prevent Github Actions rate limiting?
+  type: bool
+  default: "{{ repository_provider != 'github.com'}}"
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install and (('road-runner' in github_runner) or ('self-hosted' in github_runner) or ('onprem' in github_runner)) }}"
+
+include_sample_code:
+  help: Do you want include sample code?
+  type: bool
+  default: false
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"
+
+self_signed:
+  help: Do you want to bypass self signed certificates?
+  type: bool
+  default: false
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"

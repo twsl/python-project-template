@@ -1,0 +1,4 @@
+from {{ python_package_import_name }}.__about__ import __version__
+
+def main():
+    print(f"{{ project_name }} v{__version__}!")

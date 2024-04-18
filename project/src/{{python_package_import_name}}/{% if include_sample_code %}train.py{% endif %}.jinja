@@ -1,0 +1,20 @@
+import lightning as L
+
+from {{ python_package_import_name }}.data.datamodule import RandomDataModule
+from {{ python_package_import_name }}.models.model import BoringModel
+
+if __name__ == "__main__":
+    dm = RandomDataModule()
+
+    model = BoringModel()
+
+    # Initialize a trainer
+    trainer = L.Trainer(
+        max_epochs=1,
+        progress_bar_refresh_rate=20,
+    )
+
+    # Train the model ⚡
+    trainer.fit(model, datamodule=dm)
+
+    trainer.test(datamodule=dm)

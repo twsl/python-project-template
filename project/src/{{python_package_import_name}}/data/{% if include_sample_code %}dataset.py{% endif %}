@@ -1,0 +1,15 @@
+import torch
+from torch import Tensor
+from torch.utils.data import Dataset
+
+
+class RandomDataset(Dataset):
+    def __init__(self, size: int, num_samples: int) -> None:
+        self.len = num_samples
+        self.data = torch.randn(num_samples, size)
+
+    def __getitem__(self, index: int) -> Tensor:
+        return self.data[index]
+
+    def __len__(self) -> int:
+        return self.len

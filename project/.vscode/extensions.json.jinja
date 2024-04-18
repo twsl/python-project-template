@@ -1,0 +1,33 @@
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        {% if not include_copilot %}"visualstudioexptteam.vscodeintellicode",
+        "VisualStudioExptTeam.vscodeintellicode-completions",{% else %}"GitHub.copilot",
+        "GitHub.copilot-chat",{% endif %}
+        "charliermarsh.ruff",
+        "esbenp.prettier-vscode",
+        "ms-vscode.test-adapter-converter",
+        "littlefoxteam.vscode-python-test-adapter",
+        "njqdev.vscode-python-typehint",
+        "KevinRose.vsc-python-indent",
+        "medo64.render-crlf",
+        "shardulm94.trailing-spaces",
+        "nhoizey.gremlins",
+        "wayou.vscode-todo-highlight",
+        "Gruntfuggly.todo-tree",
+        "njpwerner.autodocstring",
+        "rodolphebarbanneau.python-docstring-highlighter",
+        "mechatroner.rainbow-csv",
+        "uctakeoff.vscode-counter",
+        "bierner.github-markdown-preview",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "ms-azuretools.vscode-docker",
+        "uctakeoff.vscode-counter",
+        "bierner.github-markdown-preview",{% if include_docs %}
+        "ExecutableBookProject.myst-highlight",{% endif %}{% if include_databricks %}
+        "databricks.databricks",
+        "paiqo.databricks-vscode"{% endif %}
+    ]
+}

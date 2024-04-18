@@ -1,0 +1,39 @@
+import lightning as L
+import torch
+from torch.utils.data import DataLoader
+
+from {{ python_package_import_name }}.data.dataset import RandomDataset
+
+
+class RandomDataModule(L.LightningDataModule):
+    def __init__(self, size: int = 32, num_samples: int = 10000, batch_size: int = 32) -> None:
+        """The Random data module.
+
+        Args:
+            size: The tensor size.
+            num_samples: The number of samples.
+            batch_size: The batch size.
+        """
+        super().__init__()
+        self.size = size
+        self.num_samples = num_samples
+        self.batch_size = batch_size
+
+    def setup(self, stage: str | None = None) -> None:
+        """Setup the data module per stage.
+
+        Args:
+            stage: The training stage.
+        """
+        self.data_test = RandomDataset(self.size, self.num_samples)
+        self.data_train = RandomDataset(self.size, self.num_samples)
+        self.data_val = RandomDataset(self.size, self.num_samples)
+
+    def train_dataloader(self) -> DataLoader:
+        return DataLoader(self.data_train, batch_size=self.batch_size)
+
+    def val_dataloader(self) -> DataLoader:
+        return DataLoader(self.data_val, batch_size=self.batch_size)
+
+    def test_dataloader(self) -> DataLoader:
+        return DataLoader(self.data_test, batch_size=self.batch_size)

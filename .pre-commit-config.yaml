@@ -1,0 +1,40 @@
+default_language_version:
+  python: python3
+
+default_stages: [commit, push]
+
+ci:
+  autofix_prs: true
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit suggestions"
+  autoupdate_schedule: weekly
+
+repos:
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.8.0
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-merge-conflict
+        args: [--assume-in-merge]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-json
+        exclude: devcontainer.json
+      - id: check-yaml
+      - id: check-toml
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-case-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=500", "--enforce-all"]
+      - id: detect-private-key
+
+  # - repo: https://github.com/aristanetworks/j2lint.git
+  #   rev: v1.1.0
+  #   hooks:
+  #     - id: j2lint
+  #       args: [--ignore, S7, --, --warn, V2, --]
