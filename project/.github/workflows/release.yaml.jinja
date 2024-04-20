@@ -10,7 +10,7 @@ jobs:
   release:
     strategy:
       matrix:
-        python-version: {{ python_version }}
+        python-version: [{{ python_version }}] # single version deployment
     runs-on: {{ github_runner }}
     defaults:
       run:
