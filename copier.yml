@@ -14,9 +14,6 @@ _skip_if_exists:
   - LICENSE.md
   - .gitignore
 
-_jinja_extensions:
-  - copier_templates_extensions.TemplateExtensionLoader
-
 _message_before_copy: |
   Thanks for generating a project using this template.
 
