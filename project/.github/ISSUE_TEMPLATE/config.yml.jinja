@@ -3,5 +3,5 @@ contact_links:
   - name: Ask a Question
     url: https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/discussions/new
     about: Ask and answer questions
-  - name: Read the documentation
-    url: https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/
+  {% if include_docs %}- name: Read the documentation
+    url: {% if repository_provider == "github.com"%}https://{{ repository_namespace }}.github.io/{{ repository_name }}/{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}{% endif %}
