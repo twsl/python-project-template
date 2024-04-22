@@ -65,7 +65,7 @@ jobs:
         run: poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/{% endif %}
 {% raw %}
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3 # cant update yet on GHES
         with:
           name: ${{ env.ARTIFACT }}{% endraw %}
           {% if docs_library == "sphinx" %}path: ./docs/build/html/{% endif %}{% if docs_library == "mkdocs" %}path: ./docs/_build/{% endif %}
@@ -87,12 +87,12 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Download Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3 # cant update yet on GHES
         with:
           path: artifacts
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2  # cant update yet on GHES
+        uses: actions/upload-pages-artifact@v2 # cant update yet on GHES
         with:
           path: {% raw %}artifacts/${{ env.ARTIFACT }}/{% endraw %}
 
