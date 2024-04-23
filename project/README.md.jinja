@@ -37,13 +37,6 @@ poetry add {{ python_package_distribution_name }}
 ```
 
 
-## Update template
-
-```bash
-copier update --trust
-```
-
-
 ## How to use it
 
 ```python
@@ -59,8 +52,14 @@ import {{ python_package_import_name }}
 poetry run sphinx-build -nWv --keep-going -b html ./docs/ ./docs/_build/
 ```{% endif %}{% if docs_library == "mkdocs" %}```bash
 poetry run mkdocs build -f ./docs/mkdocs.yaml -d ./docs/_build/
-```{% endif %}
-{% endif %}
+```
+
+{% endif %}{% endif %}
+## Update template
+
+```bash
+copier update --trust
+```
 
 ## Credits
 
