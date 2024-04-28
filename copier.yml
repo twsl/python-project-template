@@ -32,7 +32,7 @@ custom_install:
 project_name:
   type: str
   help: What is the name of your project?
-  default: example_project
+  default: example-project
   validator: >-
     {% if not project_name %}
     Project name is required.
@@ -44,6 +44,12 @@ project_description:
   type: str
   help: What is your project description?
   placeholder: "A Python package that ..."
+
+repository_provider:
+  type: str
+  help: Your Github repository provider instance domain?
+  default: github.com
+  when: "{{ custom_install }}"
 
 primary_branch:
   type: str
@@ -62,12 +68,11 @@ author_username:
 author_email:
   type: str
   help: What's the author's preferred github email address?
-  default: "{{ author_username }}@users.noreply.github.com"
-
-repository_provider:
-  type: str
-  help: Your Github repository provider instance domain?
-  default: github.com
+  placeholder: "{{ author_username }}@users.noreply.{{ repository_provider }}"
+  validator: >-
+    {% if not (author_email | regex_search('^\S+@\S+\.\S+$')) %}
+    The email must be valid.
+    {% endif %}
 
 repository_namespace:
   type: str
@@ -214,6 +219,12 @@ github_runner_python_version:
     - "3.10"
     - "3.11"
     - "3.12"
+  validator: >-
+    {% set python_minor = python_version|replace('3.', '')|float %}
+    {% set valid_list_length = github_runner_python_version|map('replace', '3.', '')|map("float")|select("ge", python_minor)|list|length%}
+    {% if not (valid_list_length == github_runner_python_version|length) %}
+    Selected values need to be greater than or equal to {{ python_version }}.
+    {% endif %}
 
 github_runner:
   type: str
