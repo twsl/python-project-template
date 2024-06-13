@@ -10,7 +10,12 @@ if __name__ == "__main__":
 
     # Initialize a trainer
     trainer = L.Trainer(
-        max_epochs=1,
+        limit_train_batches=1,
+        limit_val_batches=1,
+        limit_test_batches=1,
+        num_sanity_val_steps=0,
+        max_epochs=10,
+        enable_model_summary=False,
     )
 
     # Train the model ⚡
