@@ -17,23 +17,20 @@ class BoringModel(L.LightningModule):
         return torch.nn.functional.mse_loss(prediction, torch.ones_like(prediction))
 
     def training_step(self, batch, batch_idx) -> dict[str, Any]:
-        output = self.layer(batch)
+        output = self(batch)
         loss = self.loss(batch, output)
+        self.log("train_loss", loss)
         return {"loss": loss}
 
-    def training_step_end(self, training_step_outputs) -> Any:
-        return training_step_outputs
-
-    def training_epoch_end(self, outputs) -> Any:
-        return torch.stack([x["loss"] for x in outputs]).mean()
-
-    def validation_step(self, batch, batch_idx) -> dict[str, Any]:
-        output = self.layer(batch)
+    def validation_step(self, batch, batch_idx) -> None:
+        output = self(batch)
         loss = self.loss(batch, output)
-        return {"x": loss}
+        self.log("valid_loss", loss)
 
-    def validation_epoch_end(self, outputs) -> Any:
-        return torch.stack([x["x"] for x in outputs]).mean()
+    def test_step(self, batch, batch_idx) -> None:
+        output = self(batch)
+        loss = self.loss(batch, output)
+        self.log("test_loss", loss)
 
     def test_step(self, batch, batch_idx) -> dict[str, Any]:
         output = self.layer(batch)
