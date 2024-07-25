@@ -41,13 +41,6 @@ repos:
         args: [-c, pyproject.toml]
         additional_dependencies: ["bandit[toml]"]
 
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.3
-    hooks:
-      - id: python-safety-dependencies-check
-        files: pyproject.toml
-        args: ["--groups=dev,test"]
-
   - repo: https://github.com/kynan/nbstripout
     rev: 0.7.1
     hooks:
