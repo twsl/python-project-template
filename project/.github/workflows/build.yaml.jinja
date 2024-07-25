@@ -55,12 +55,12 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
 
-      - name: Install plugin
-        run: poetry add --group test pytest-github-actions-annotate-failures
-
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
+
+      - name: Install plugin
+        run: poetry add --group test pytest-github-actions-annotate-failures
 
       - name: Check pip
         run: |
