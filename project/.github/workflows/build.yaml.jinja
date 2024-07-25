@@ -62,10 +62,6 @@ jobs:
       - name: Install plugin
         run: poetry add --group test pytest-github-actions-annotate-failures
 
-      - name: Check pip
-        run: |
-          pip check
-
       - name: Build dependencies
         run: poetry build
 
