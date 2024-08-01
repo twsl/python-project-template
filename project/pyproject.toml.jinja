@@ -19,7 +19,6 @@ homepage = {% if repository_provider == "github.com"%}"https://{{ repository_nam
 packages = [ { include = "{{ python_package_import_name }}", from = "src" } ]
 keywords = []
 
-
 [tool.poetry.dependencies]
 python = "^{{ python_version }}"
 {% if include_sample_code %}torch = "^2.3.1"
