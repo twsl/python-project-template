@@ -16,10 +16,8 @@ jobs:
   build-and-test:
     name: Build and Test
     strategy:
-      fail-fast: true
-{% if github_rate_limit %}
-      max-parallel: 1 # try to to avoid rate limiting
-{% endif %}
+      fail-fast: true{% if github_rate_limit %}
+      max-parallel: 1 # try to to avoid rate limiting{% endif %}
       matrix:
         python-version: {{ github_runner_python_version }}
     runs-on: {{ github_runner }}
