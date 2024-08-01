@@ -1,6 +1,6 @@
 # {{ project_name }}
 
-<!--- BADGES: START --->
+
 [![Build](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/build.yaml/badge.svg)](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/build.yaml){% if include_docs %}
 [![Documentation](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/docs.yaml/badge.svg)](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/docs.yaml)
 {% if docs_library == "mkdocs" %}[![Docs with MkDocs](https://img.shields.io/badge/MkDocs-docs?style=flat&logo=materialformkdocs&logoColor=white&color=%23526CFE)](https://squidfunk.github.io/mkdocs-material/){% elif docs_library == "sphinx" %}[![Docs with Sphinx](https://img.shields.io/badge/Sphinx-docs?style=flat&logo=sphinx&logoColor=white&color=%230A507A)](https://www.sphinx-doc.org/en/master/){% endif %}{% endif %}
@@ -13,8 +13,6 @@
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-border.json)](https://github.com/copier-org/copier)
 {% if copyright_license == "GNU GPLv3" %}[![License](https://img.shields.io/badge/license-GPLv3-blue)](LICENSE){% elif copyright_license == "MIT" %}[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE){% endif %}
 
-
-<!--- BADGES: END --->
 
 {{ project_description }}
 
