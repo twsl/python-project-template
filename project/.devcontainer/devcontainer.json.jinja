@@ -88,6 +88,8 @@
                 "http.proxyStrictSSL": false, // required for self signed certificates{% endif %}
                 "telemetry.telemetryLevel": "off",
                 "files.eol": {% if line_ending == "lf" %}"\n",{% elif line_ending == "crlf" %}"\r\n",{% endif %}
+                "code-eol.highlightNonDefault": true,
+                "code-eol.highlightExtraWhitespace": true
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
