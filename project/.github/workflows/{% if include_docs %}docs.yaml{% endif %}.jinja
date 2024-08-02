@@ -48,9 +48,9 @@ jobs:
         id: cached-poetry-dependencies
         with:
           path: .venv
-          key: venv-Linux-{{ python_version }}-{% raw %}${{ hashFiles('poetry.lock') }}{% endraw %}
+          key: venv-Linux-{{ python_version }}-{% raw %}${{ hashFiles('poetry.lock') }}{% endraw %}{% if docs_library == "sphinx" %}
 
-      {% if docs_library == "sphinx" %}- name: Sphinx
+      - name: Sphinx
         run: sudo apt install -y python3-sphinx{% endif %}
 
       - name: Install dependencies
@@ -58,10 +58,12 @@ jobs:
         run: poetry install --no-interaction
 
       - name: Build dependencies
-        run: poetry build
+        run: poetry build{% if docs_library == "sphinx" %}
 
-      {% if docs_library == "sphinx" %}- name: Build Sphinx docs
-        run: poetry run sphinx-build -M html docs/source/ docs/build/{% endif %}{% if docs_library == "mkdocs" %}- name: Build MkDocs docs
+      - name: Build Sphinx docs
+        run: poetry run sphinx-build -M html docs/source/ docs/build/{% endif %}{% if docs_library == "mkdocs" %}
+
+      - name: Build MkDocs docs
         run: poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/{% endif %}
 {% raw %}
       - name: Upload build artifacts
