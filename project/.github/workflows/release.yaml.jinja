@@ -49,9 +49,9 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
 
-      - name: Check pip
+      - name: Check poetry
         run: |
-          pip check
+          poetry check
 
       - name: Build
         run: |
