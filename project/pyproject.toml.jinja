@@ -25,7 +25,7 @@ python = "^{{ python_version }}"
 lightning = "^2.4.0"{% endif %}
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.6.2"
+ruff = "^0.6.3"
 bandit = "^1.7.9"
 pre-commit = "^3.8.0"
 pyright = "^1.1.377"
@@ -90,7 +90,7 @@ __version_tuple__ = (0, 0, 0)
 
 [tool.pytest.ini_options]
 minversion = "8.0"
-addopts = "--doctest-glob='test_*.md'"
+addopts = "--doctest-glob='test_*.md' --cov=src/{{ python_package_import_name }} --cov-report xml"
 testpaths = [
     "tests",
 ]
