@@ -106,7 +106,7 @@ exclude_lines = [
     # Have to re-enable the standard pragma
     "pragma: no cover",
 
-    # Don't complain about missing debug-only code:
+    # Don ot complain about missing debug-only code:
     "def __repr__",
     "if self.debug:",
     "if debug:",
@@ -125,6 +125,9 @@ exclude_lines = [
 [tool.ruff]
 line-length = 120  # Must agree with Black{% if include_notebooks %}
 extend-include = ["*.ipynb"]{% endif %}
+lint.extend-select = [
+    "I",
+]
 lint.select = [
     "B",  # flake8-bugbear
     "C4", # flake8-comprehensions
