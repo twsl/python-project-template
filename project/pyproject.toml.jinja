@@ -26,7 +26,7 @@ lightning = "^2.4.0"{% endif %}
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.6.8"
-bandit = "^1.7.9"
+bandit = "^1.7.10"
 pre-commit = "^3.8.0"
 pyright = "^1.1.380"
 {% if include_notebooks %}ipykernel = "^6.29.5"
@@ -36,27 +36,21 @@ jupytext = " ^1.16.4"
 nbconvert = "^7.16.3"{% endif %}
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.3.2"
+pytest = "^8.3.3"
 pytest-cov = "^5.0.0"
 pytest-mock = "^3.12.0"
 pre-commit = "^3.6.2"
-pytest-cases = "^3.8.1"
+pytest-cases = "^3.8.6"
 
 {% if include_docs %}[tool.poetry.group.docs.dependencies]
-{% if docs_library == "sphinx"%}sphinx = "^7.2.6"
-sphinx-autoapi = "^3.0.0"
-sphinx-copybutton = "^0.5.2"
-sphinxawesome-theme = "^5.1.1"
-myst-parser = "^2.0.0"
-sphinxcontrib-bibtex = "^2.6.2"
-{% if include_notebooks %}myst-nb = "^1.0.0"{% endif %}{% endif %}{% if docs_library == "mkdocs"%}mkdocs = "^1.6.1"
-mkdocs-material = "^9.5.34"
-mkdocs-git-revision-date-localized-plugin = "^1.2.7"
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.5.38"
+mkdocs-git-revision-date-localized-plugin = "^1.2.9"
 mkdocs-awesome-pages-plugin = "^2.9.2"
 mkdocs-git-authors-plugin = "^0.9.0"
-mkapi = "^2.1.0"
-pygments = "^2.18.0"
-{% if include_notebooks %}mkdocs-jupyter = "^0.25.0"{% endif %}{% endif %}{% endif %}
+mkapi = "^3.0.20"
+pygments = "^2.18.0"{% if include_notebooks %}
+mkdocs-jupyter = "^0.25.0"{% endif %}
 
 [tool.poetry.group.debug]
 optional = true

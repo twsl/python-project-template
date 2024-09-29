@@ -172,15 +172,6 @@ include_docs:
     no: false
   when: "{{ custom_install }}"
 
-docs_library:
-  type: str
-  default: mkdocs
-  help: Which documentation library do you want to use?
-  choices:
-    - mkdocs
-    - sphinx
-  when: "{{ custom_install and include_docs }}"
-
 include_notebooks:
   help: Do you want to include rendered notebooks in your documentation?
   type: bool
