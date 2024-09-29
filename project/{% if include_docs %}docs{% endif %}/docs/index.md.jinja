@@ -1,5 +1,6 @@
-# {{ project_name }}
+# {{ project_name }}: {{ project_description }}
 
+Welcome to {{project_name}}'s documentation!
 
 [![Build](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/build.yaml/badge.svg)](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/build.yaml){% if include_docs %}
 [![Documentation](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/docs.yaml/badge.svg)](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/actions/workflows/docs.yaml)
@@ -12,9 +13,6 @@
 [![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}/releases)
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-border.json)](https://github.com/copier-org/copier)
 {% if copyright_license == "GNU GPLv3" %}[![License](https://img.shields.io/badge/license-GPLv3-blue)](LICENSE){% elif copyright_license == "MIT" %}[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE){% endif %}
-
-
-{{ project_description }}
 
 
 ## Features
@@ -34,31 +32,16 @@ With [`poetry`](https://python-poetry.org/):
 poetry add {{ python_package_distribution_name }}
 ```
 
-
-## How to use it
+## Usage
 
 ```python
-import {{ python_package_import_name }}
+import {{ python_package_distribution_name }}
 
 ...
 ```
 
+{% if include_notebooks %}See a more complete example in the [notebooks](notebooks) folder.{% endif %}
 
-{% if include_docs %}## Docs
+## API
 
-{% if docs_library == "sphinx" %}```bash
-poetry run sphinx-build -nWv --keep-going -b html ./docs/ ./docs/_build/
-```{% endif %}{% if docs_library == "mkdocs" %}```bash
-poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/
-```
-
-{% endif %}{% endif %}
-## Update template
-
-```bash
-copier update --trust
-```
-
-## Credits
-
-This project was generated with [![🚀 A generic python project template.](https://img.shields.io/badge/python--project--template-%F0%9F%9A%80-brightgreen)](https://github.com/twsl/python-project-template)
+Check the [API reference](api/{{ python_package_import_name }}/) for more details.
