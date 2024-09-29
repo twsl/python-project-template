@@ -20,8 +20,8 @@ packages = [ { include = "{{ python_package_import_name }}", from = "src" } ]
 keywords = []
 
 [tool.poetry.dependencies]
-python = "^{{ python_version }}"
-{% if include_sample_code %}torch = "^2.4.0"
+python = "^{{ python_version }}"{% if include_sample_code %}
+torch = "^2.4.0"
 lightning = "^2.4.0"{% endif %}
 
 [tool.poetry.group.dev.dependencies]
@@ -50,7 +50,7 @@ mkdocs-awesome-pages-plugin = "^2.9.2"
 mkdocs-git-authors-plugin = "^0.9.0"
 mkapi = "^3.0.20"
 pygments = "^2.18.0"{% if include_notebooks %}
-mkdocs-jupyter = "^0.25.0"{% endif %}
+mkdocs-jupyter = "^0.25.0"{% endif %}{% endif %}
 
 [tool.poetry.group.debug]
 optional = true
