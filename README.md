@@ -97,9 +97,7 @@ The template uses the following variables to customize the project:
 | `line_ending`                      | `lf`                                             |
 | `use_precommit`                    | `true`                                           |
 | `include_docs`                     | `true`                                           |
-| `docs_library`                     | `mkdocs`                                         |
 | `include_notebooks`                | `true`                                           |
-| `include_databricks`               | `true`                                           |
 | `include_databricks`               | `true`                                           |
 | `include_copilot`                  | `true`                                           |
 | `github_runner_python_version`     | `3.11`                                           |
