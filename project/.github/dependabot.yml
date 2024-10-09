@@ -8,12 +8,12 @@ updates:
   - package-ecosystem: gitsubmodule
     directory: /
     schedule:
-      interval: weekly
+      interval: weekly{% if repository_provider == "github.com"%}
 
   - package-ecosystem: devcontainers
     directory: /
     schedule:
-      interval: weekly
+      interval: weekly{% endif %}
 
   - package-ecosystem: github-actions
     directory: /
