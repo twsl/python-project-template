@@ -9,15 +9,20 @@ ci:
   autoupdate_schedule: weekly
 
 repos:
+  # https://github.com/python-poetry/poetry/pull/9716
+  - repo: https://gitlab.com/vojko.pribudic.foss/pre-commit-update
+    rev: v0.5.1post1
+    hooks:
+      - id: pre-commit-update
+
   - repo: https://github.com/python-poetry/poetry
-    # https://python-poetry.org/docs/pre-commit-hooks/#why-does-pre-commit-autoupdate-not-update-to-the-latest-version
-    rev: 1.8.0
+    rev: 1.8.4
     hooks:
       - id: poetry-check
       - id: poetry-lock
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-merge-conflict
         args: [--assume-in-merge]
@@ -63,6 +68,6 @@ repos:
         types: [python]
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.19.3
+    rev: v8.21.0
     hooks:
       - id: gitleaks
