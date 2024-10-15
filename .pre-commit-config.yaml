@@ -20,6 +20,8 @@ repos:
     hooks:
       - id: check-merge-conflict
         args: [--assume-in-merge]
+      - id: mixed-line-ending
+        args: [--fix=lf]
       - id: end-of-file-fixer
       - id: trailing-whitespace
       - id: check-json
