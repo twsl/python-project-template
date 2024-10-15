@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_src_path: ./project
+_src_path: ./
 author_email: 45483159+twsl@users.noreply.github.com
 author_username: twsl
 copyright_holder: twsl
@@ -11,7 +11,6 @@ github_runner:
 - ubuntu-latest
 github_runner_python_version:
 - '3.11'
-- '3.12'
 include_copilot: false
 include_databricks: false
 include_docs: true
@@ -19,7 +18,7 @@ include_notebooks: true
 include_sample_code: false
 line_ending: lf
 primary_branch: main
-project_description: ''
+project_description: 'The python description'
 project_name: example-project
 python_package_command_line_name: example-project
 python_package_distribution_name: example-project
