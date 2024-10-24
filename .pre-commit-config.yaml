@@ -1,7 +1,7 @@
 default_language_version:
   python: python3
 
-default_stages: [commit, push]
+default_stages: [pre-commit, pre-push]
 
 ci:
   autofix_prs: true
