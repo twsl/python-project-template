@@ -120,7 +120,7 @@ jobs:
     name: Publish Unit Tests Results
     needs: build-and-test
     runs-on: {{ github_runner }}
-    if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}
+    {% raw %}if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}{% endraw %}
 
     steps:
       - name: Download Artifacts
