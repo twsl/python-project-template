@@ -70,8 +70,8 @@ extra:
   generator: false
 
 plugins:
-  - search
-  - mkdocs-jupyter
+  - search{% if include_notebooks %}
+  - mkdocs-jupyter{% endif %}
   - mkapi
   - awesome-pages
   - tags
