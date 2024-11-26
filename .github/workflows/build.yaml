@@ -55,5 +55,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: copier-results-${{ runner.os }}
-          path: ./dist
+          path: ./dist/**/*
+          include-hidden-files: true
         if: ${{ always() }}
