@@ -20,8 +20,6 @@ concurrency:
 
 env:
   ARTIFACT: docs
-
-{% if repository_provider == 'github.com' %}{% set action_version = 4 %}{% else %}{% set action_version = 3 %}{% endif%}
 {% if 'road-runner' in github_runner %}{% set github_runner = github_runner + [github_runner_onprem] %}{% endif %}
 jobs:
   build-docs:
@@ -49,10 +47,7 @@ jobs:
         id: cached-poetry-dependencies
         with:
           path: .venv
-          key: venv-Linux-{{ python_version }}-{% raw %}${{ hashFiles('poetry.lock') }}{% endraw %}{% if docs_library == "sphinx" %}
-
-      - name: Sphinx
-        run: sudo apt install -y python3-sphinx{% endif %}
+          key: venv-Linux-{{ python_version }}-{% raw %}${{ hashFiles('poetry.lock') }}{% endraw %}
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
@@ -65,7 +60,7 @@ jobs:
         run: poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v{{ action_version }} # cant update yet on GHES
+        uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
         {% raw %}with:
           name: ${{ env.ARTIFACT }}
           path: ./_build/
@@ -87,15 +82,15 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Download Artifacts
-        uses: actions/download-artifact@v{{ action_version }}{% if repository_provider != 'github.com' %}  # cant update yet on GHES{% endif %}
+        uses: actions/download-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
         with:
           path: artifacts
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v{{ action_version -1 }}{% if repository_provider != 'github.com' %}  # cant update yet on GHES{% endif %}
+        uses: actions/upload-pages-artifact@v{{ github_action_version -1 }}{% if ghes %}  # cant update yet on GHES{% endif %}
         with:
           path: {% raw %}artifacts/${{ env.ARTIFACT }}/{% endraw %}
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v{{ action_version }}{% if repository_provider != 'github.com' %}  # cant update yet on GHES{% endif %}
+        uses: actions/deploy-pages@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}

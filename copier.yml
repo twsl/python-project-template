@@ -51,6 +51,11 @@ repository_provider:
   default: github.com
   when: "{{ custom_install }}"
 
+ghes:
+  type: bool
+  default: "{{ repository_provider != 'github.com' }}"
+  when: false
+
 primary_branch:
   type: str
   help: What is your primary git branch?
@@ -244,11 +249,16 @@ github_runner_onprem:
 github_rate_limit:
   help: Do you want to prevent Github Actions rate limiting?
   type: bool
-  default: "{{ repository_provider != 'github.com'}}"
+  default: "{{ ghes }}"
   choices:
     yes: true
     no: false
   when: "{{ custom_install and (('road-runner' in github_runner) or ('self-hosted' in github_runner) or ('onprem' in github_runner)) }}"
+
+github_action_version:
+  type: int
+  default: "{% if ghes %}3{% else %}4{% endif %}"
+  when: false
 
 include_sample_code:
   help: Do you want include sample code?
