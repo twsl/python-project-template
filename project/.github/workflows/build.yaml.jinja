@@ -104,7 +104,7 @@ jobs:
         {% raw %}if: ${{ always() }}{% endraw %}
 
       - name: Upload test coverage
-        uses: actions/upload-artifact@v{{ action_version }}  # cant update yet on GHES
+        uses: actions/upload-artifact@v{{ action_version }}{% if repository_provider != 'github.com' %}  # cant update yet on GHES{% endif %}
         {% raw %}with:
           name: pytest-coverage-${{ runner.os }}-${{ matrix.python-version }}
           path: code-coverage-results.md
@@ -118,7 +118,7 @@ jobs:
         if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}{% endraw %}
 
       - name: Upload test results
-        uses: actions/upload-artifact@v{{ action_version }}  # cant update yet on GHES
+        uses: actions/upload-artifact@v{{ action_version }}{% if repository_provider != 'github.com' %}  # cant update yet on GHES{% endif %}
         {% raw %}with:
           name: pytest-results-${{ runner.os }}-${{ matrix.python-version }}
           path: junit/test-results-${{ matrix.python-version }}.xml
