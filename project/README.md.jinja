@@ -46,13 +46,11 @@ import {{ python_package_import_name }}
 
 {% if include_docs %}## Docs
 
-{% if docs_library == "sphinx" %}```bash
-poetry run sphinx-build -nWv --keep-going -b html ./docs/ ./docs/_build/
-```{% endif %}{% if docs_library == "mkdocs" %}```bash
+```bash
 poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/
 ```
 
-{% endif %}{% endif %}
+{% endif %}
 ## Update template
 
 ```bash

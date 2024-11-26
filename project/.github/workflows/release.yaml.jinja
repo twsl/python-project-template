@@ -5,6 +5,7 @@ on:
   release:
     types: [published]
 
+{% if repository_provider == 'github.com' %}{% set action_version = 4 %}{% else %}{% set action_version = 3 %}{% endif%}
 {% if 'road-runner' in github_runner %}{% set github_runner = github_runner + [github_runner_onprem] %}{% endif %}
 jobs:
   release:
@@ -16,17 +17,16 @@ jobs:
       run:
         shell: bash
 
-{% raw %}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Python ${{ matrix.python-version }}
+      {% raw %}- name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python-version }}{% endraw %}
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -43,9 +43,9 @@ jobs:
       - name: Set up cache
         uses: actions/cache@v4
         id: cached-poetry-dependencies
-        with:
+        {% raw %}with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}{% endraw %}
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
@@ -60,18 +60,17 @@ jobs:
           poetry build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3 # cant update yet on GHES
-        with:
+        uses: actions/upload-artifact@v{{ action_version }}  # cant update yet on GHES
+        {% raw %}with:
           name: build-${{ github.sha }}
-          path: dist/
+          path: dist/{% endraw %}
 
       - name: Show
         run: ls -l dist/
 
-      # - name: Publish
+      {% raw %}# - name: Publish
       #   run: |
-      #     poetry publish -u "__token__" -p ${{ secrets.PYPI_API_TOKEN }}
-{% endraw %}
+      #     poetry publish -u "__token__" -p ${{ secrets.PYPI_API_TOKEN }}{% endraw %}
 
   upload-packages:
     runs-on: {{ github_runner }}
@@ -80,13 +79,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-{% raw %}
+
       - name: Download artifacts
-        uses: actions/download-artifact@v3 # cant update yet on GHES
+        uses: actions/download-artifact@v{{ action_version }}  # cant update yet on GHES
         with:
-          name: build-${{ github.sha }}
-          path: dist/
-{% endraw %}
+          {% raw %}name: build-${{ github.sha }}
+          path: dist/{% endraw %}
+
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.event.ref, 'refs/tags') || github.event_name == 'release'

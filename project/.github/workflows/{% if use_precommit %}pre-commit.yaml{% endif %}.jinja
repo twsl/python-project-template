@@ -23,8 +23,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-{% raw %}
-      - name: Set up Python ${{ matrix.python-version }}
+
+      {% raw %}- name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
@@ -42,9 +42,9 @@ jobs:
       - name: Set up cache
         uses: actions/cache@v4
         id: cached-poetry-dependencies
-        with:
+        {% raw %}with:
           path: .venv
-          {% raw %}key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}{% endraw %}
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}{% endraw %}
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
