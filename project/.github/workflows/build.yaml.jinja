@@ -92,6 +92,8 @@ jobs:
           --junitxml=junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml \
           --cov=${{ github.event.repository.name }}{% endraw %}
 
+      # MishaKav/pytest-coverage-comment
+
       - name: Coverage summary report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
