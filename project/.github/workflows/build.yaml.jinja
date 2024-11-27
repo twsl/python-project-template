@@ -119,7 +119,7 @@ jobs:
         uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
         {% raw %}with:
           name: pytest-results-${{ runner.os }}-${{ matrix.python-version }}
-          path: junit/test-results-${{ matrix.python-version }}.xml
+          path: junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml
         if: ${{ always() }}{% endraw %}
 
       - name: Publish Unit Test Results
