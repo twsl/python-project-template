@@ -6,6 +6,7 @@
 
 * @{{ author_username }}
 
-/.github/ @{{ author_username }}
+/.github/ @{{ author_username }}{% if include_docs %}
+/docs/ @{{ author_username }}{% endif %}
 /src/ @{{ author_username }}
 /tests/ @{{ author_username }}
