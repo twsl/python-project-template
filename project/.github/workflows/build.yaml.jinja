@@ -117,8 +117,10 @@ jobs:
         {% raw %}with:
           header: Code Coverage ${{ runner.os }} ${{ matrix.python-version }}
           message: |
-            # Code Coverage ${{ runner.os }} ${{ matrix.python-version }} at ${{ github.sha }}.
+            ## Code Coverage ${{ runner.os }} ${{ matrix.python-version }}.
             ${{ steps.getversion.outputs.coverage }}
+
+            Results for commit ${{ github.sha }}.
         if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}{% endraw %}
 
       - name: Upload test results
