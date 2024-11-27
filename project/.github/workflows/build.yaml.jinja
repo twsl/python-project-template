@@ -111,6 +111,7 @@ jobs:
       - name: Read code coverage file
         id: getversion
         run: echo "::set-output name=coverage::$(cat code-coverage-results.md)"
+        {% raw %}if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}{% endraw %}
 
       - name: Add coverage PR comment
         uses: marocchino/sticky-pull-request-comment@v2.9.0
