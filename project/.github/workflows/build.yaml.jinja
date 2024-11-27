@@ -116,7 +116,7 @@ jobs:
         {% raw %}if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}{% endraw %}
 
       - name: Add coverage PR comment
-        uses: marocchino/sticky-pull-request-comment@v2.9.0
+        uses: marocchino/sticky-pull-request-comment@v2
         {% raw %}with:
           header: Code Coverage ${{ runner.os }} ${{ matrix.python-version }}
           message: |
@@ -136,5 +136,7 @@ jobs:
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         {% raw %}with:
+          check_name: Test Results ${{ runner.os }} ${{ matrix.python-version }}
+          report_individual_runs: true
           files: junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml
         if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}{% endraw %}
