@@ -57,15 +57,15 @@ jobs:
         run: poetry build
 
       - name: Build MkDocs docs
-        run: poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/
         env:
           JUPYTER_PLATFORM_DIRS: 1
+        run: poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
         {% raw %}with:
           name: ${{ env.ARTIFACT }}
-          path: ./_build/
+          path: ./docs/_build/
         if: ${{ always() }}{% endraw %}
 
   deploy-docs:
