@@ -23,7 +23,7 @@ copier copy --trust git+https://github.com/twsl/python-project-template path/to/
 
 ### Development features
 
-- Supports `Python 3.8` and higher.
+- Supports `Python 3.9` and higher.
 - [`Poetry`](https://python-poetry.org/) as a dependencies manager. See configuration in `pyproject.toml`.
 - Automatic codestyle with [`ruff`](https://github.com/astral-sh/ruff).
 - Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting.
