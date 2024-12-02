@@ -119,12 +119,19 @@ exclude_lines = [
 ]
 
 [tool.ruff]
-line-length = 120  # Must agree with Black{% if include_notebooks %}
-extend-include = ["*.ipynb"]{% endif %}
-lint.extend-select = [
-    "I",
+line-length = 120  # Must agree with Black
+extend-include = ["*.ipynb"]
+exclude = [
+    "migrations",
+    "__pycache__",
+    "env",
+    ".env",
+    "venv",
+    ".venv",
 ]
-lint.select = [
+
+[tool.ruff.lint]
+select = [
     "B",  # flake8-bugbear
     "C4", # flake8-comprehensions
     "D",  # pydocstyle
@@ -143,15 +150,10 @@ lint.select = [
     "W",  # Warning
     "YTT", # flake8-2020
 ]
-exclude = [
-    "migrations",
-    "__pycache__",
-    "env",
-    ".env",
-    "venv",
-    ".venv",
+extend-select = [
+    "I",
 ]
-lint.ignore = [
+ignore = [
     "D100",
     "D101",
     "D102",
@@ -178,6 +180,8 @@ extend-immutable-calls = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ruff.lint.pycodestyle]
 max-doc-length = 120
 max-line-length = 120
 
