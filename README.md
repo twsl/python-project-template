@@ -40,7 +40,7 @@ copier copy --trust git+https://github.com/twsl/python-project-template path/to/
 - Everything is already set up for security checks, codestyle checks, code formatting, testing, linting, docker builds
 - Always up-to-date dependencies with [`@dependabot`](https://dependabot.com/).
 - Automatic release notes with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter).
-- Documentation with [`MkDocs`](https://www.mkdocs.org/) or [`Sphinx`](https://www.sphinx-doc.org/en/master/).
+- Documentation with [`MkDocs`](https://www.mkdocs.org/).
 
 ### Open source community features
 
