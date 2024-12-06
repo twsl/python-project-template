@@ -28,7 +28,7 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "poetry install {% if use_precommit %}&& pre-commit install && pre-commit autoupdate{% endif %}",
+    "postCreateCommand": "poetry install {% if use_precommit %}&& pre-commit install{% endif %}",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
