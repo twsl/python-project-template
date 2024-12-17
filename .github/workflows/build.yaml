@@ -33,6 +33,7 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
+          virtualenvs-path: .venv
 
       - name: Add poetry to path
         run: echo "$(poetry env info --path)/bin" >> $GITHUB_PATH
