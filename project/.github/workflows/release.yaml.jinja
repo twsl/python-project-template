@@ -33,6 +33,7 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
+          virtualenvs-path: .venv
 
       - name: Dynamic versioning
         run: poetry self add "poetry-dynamic-versioning[plugin]"
