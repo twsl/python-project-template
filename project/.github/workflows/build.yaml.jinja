@@ -60,7 +60,9 @@ jobs:
 
       - name: Install dependencies
         # if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --all-extras
+        run: |
+          poetry lock --no-update \
+          && poetry install --no-interaction --all-extras
 {% if use_precommit %}
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
