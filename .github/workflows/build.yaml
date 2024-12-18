@@ -50,7 +50,7 @@ jobs:
         run: poetry install --no-interaction
 
       - name: Test
-        run: poetry run copier copy ./ ./dist --data-file "./.github/assets/.copier-answers.yml" -f
+        run: poetry run copier copy ./ ./dist --data-file "./.github/assets/.copier-answers.yml" -f --vcs-ref=HEAD
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

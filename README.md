@@ -71,6 +71,16 @@ You can update the template in your destination folder with:
 copier update --trust path/to/destination
 ```
 
+### Develpment
+
+The devcontainer is already set up for you, just open the project in VSCode and you will be prompted to open the project in the devcontainer.
+
+To test the project you can run:
+
+```bash
+copier copy ./ ./dist --data-file "./.github/assets/.copier-answers.yml" -f --vcs-ref=HEAD
+```
+
 ### Variables
 
 The template uses the following variables to customize the project:
