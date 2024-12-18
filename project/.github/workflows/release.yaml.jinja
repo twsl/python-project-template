@@ -44,8 +44,8 @@ jobs:
           restore-keys: venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
 
       - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction
+        # if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --all-extras
 
       - name: Dynamic versioning
         run: poetry self add "poetry-dynamic-versioning[plugin]"
