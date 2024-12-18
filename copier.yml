@@ -211,11 +211,12 @@ github_runner_python_version:
   default: ["{{ python_version }}"]
   multiselect: true
   choices:
-    - "3.8"
     - "3.9"
     - "3.10"
     - "3.11"
     - "3.12"
+    - "3.13"
+    - "3.14"
   validator: >-
     {% set python_minor = python_version|replace('3.', '')|float %}
     {% set valid_list_length = github_runner_python_version|map('replace', '3.', '')|map("float")|select("ge", python_minor)|list|length%}
