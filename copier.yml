@@ -255,7 +255,7 @@ github_rate_limit:
   choices:
     yes: true
     no: false
-  when: "{{ custom_install and (('road-runner' in github_runner) or ('self-hosted' in github_runner) }}"
+  when: "{{ custom_install and (('road-runner' in github_runner) or ('self-hosted' in github_runner)) }}"
 
 github_action_version:
   type: int
