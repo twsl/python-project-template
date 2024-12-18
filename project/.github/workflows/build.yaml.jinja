@@ -60,8 +60,13 @@ jobs:
           restore-keys: venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
 
       - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction
+        #if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --all-extras
+{% if use_precommit %}
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+        env:
+          SKIP: poetry-lock{% endif %}
 
       - name: Install plugin
         run: poetry add --group test pytest-github-actions-annotate-failures
