@@ -53,9 +53,7 @@ jobs:
 
       - name: Install dependencies
         # if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: |
-          poetry lock --no-update \
-          && poetry install --no-interaction --all-extras
+        run: poetry install --no-interaction --all-extras
 
       - name: Build dependencies
         run: poetry build
