@@ -6,7 +6,6 @@ on:
     # branches to consider in the event; optional, defaults to all
     branches:
       - main
-
 {% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_onprem] %}{% endif %}
 jobs:
   update_release_draft:

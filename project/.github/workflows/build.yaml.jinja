@@ -8,8 +8,7 @@ on:
 {% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_onprem] %}{% endif %}{% raw %}
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-{% endraw %}
+  cancel-in-progress: true{% endraw %}
 
 jobs:
   build-and-test:

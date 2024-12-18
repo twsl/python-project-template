@@ -4,8 +4,6 @@ name: Release
 on:
   release:
     types: [published]
-
-{% if repository_provider == 'github.com' %}{% set action_version = 4 %}{% else %}{% set action_version = 3 %}{% endif%}
 {% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_onprem] %}{% endif %}
 jobs:
   release:
@@ -16,7 +14,7 @@ jobs:
     defaults:
       run:
         shell: bash
-
+{% if repository_provider == 'github.com' %}{% set action_version = 4 %}{% else %}{% set action_version = 3 %}{% endif%}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
