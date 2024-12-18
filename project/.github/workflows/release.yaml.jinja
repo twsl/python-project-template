@@ -6,7 +6,7 @@ on:
     types: [published]
 
 {% if repository_provider == 'github.com' %}{% set action_version = 4 %}{% else %}{% set action_version = 3 %}{% endif%}
-{% if 'road-runner' in github_runner %}{% set github_runner = github_runner + [github_runner_onprem] %}{% endif %}
+{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_onprem] %}{% endif %}
 jobs:
   release:
     strategy:
