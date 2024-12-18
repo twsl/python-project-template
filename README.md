@@ -60,7 +60,7 @@ pip install --upgrade copier
 Then, you can copy the template to your destination folder:
 
 ```bash
-copier copy --trust git+https://github.com/twsl/python-project-template path/to/destination
+copier copy --trust git+https://github.com/twsl/python-project-template path/to/destination  --vcs-ref=HEAD
 ```
 
 ### Update
@@ -68,7 +68,7 @@ copier copy --trust git+https://github.com/twsl/python-project-template path/to/
 You can update the template in your destination folder with:
 
 ```bash
-copier update --trust path/to/destination
+copier update --trust path/to/destination  --vcs-ref=HEAD
 ```
 
 ### Develpment
