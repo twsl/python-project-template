@@ -233,18 +233,19 @@ github_runner:
     MacOS: macos-latest
     # self-hosted infra tags
     SelfHosted: self-hosted
-    OnPrem: onprem
     RoadRunner: road-runner
 
 github_runner_onprem:
   type: str
   help: Which additional tags do you want to add to your onprem runner?
   when: "{{ 'road-runner' in github_runner }}"
-  default: small
+  default: os-small-amd64-linux
   choices:
-    Small: small
-    Medium: medium
-    Large: large
+    Tiny: caas-tiny-amd64-linux
+    Small: os-small-amd64-linux
+    Medium: os-medium-amd64-linux
+    Large: os-large-amd64-linux
+    XL: os-xlarge-amd64-linux
 
 github_rate_limit:
   help: Do you want to prevent Github Actions rate limiting?
@@ -253,7 +254,7 @@ github_rate_limit:
   choices:
     yes: true
     no: false
-  when: "{{ custom_install and (('road-runner' in github_runner) or ('self-hosted' in github_runner) or ('onprem' in github_runner)) }}"
+  when: "{{ custom_install and (('road-runner' in github_runner) or ('self-hosted' in github_runner) }}"
 
 github_action_version:
   type: int
