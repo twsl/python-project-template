@@ -17,12 +17,9 @@ jobs:
       pull-requests: write
     runs-on: {{ github_runner }}
 
-
-    steps:
-{% if repository_provider != 'github.com'%}
+    steps:{% if repository_provider != 'github.com'%}
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
-      - name: Set GHE_HOST
-{% raw %}
+      - name: Set GHE_HOST{% raw %}
         run: |
           echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
 {% endraw %}{% endif %}
