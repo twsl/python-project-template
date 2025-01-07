@@ -4,22 +4,30 @@ build-backend = "poetry_dynamic_versioning.backend"
 
 [project]
 name = "{{ python_package_distribution_name }}"
-requires-python = ">={{ python_version }}"
-
-# TODO: https://github.com/python-poetry/poetry/issues/3332
-[tool.poetry]
-name = "{{ python_package_distribution_name }}"
 version = "0.0.0"
+requires-python = ">={{ python_version }}"
 description = "{{ project_description }}"
-authors = ["{{ author_username }} <{{ author_email }}>"]
-license = "{{ copyright_license }}"
-readme = "README.md"
-repository = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"
-homepage = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
-packages = [ { include = "{{ python_package_import_name }}", from = "src" } ]
-keywords = []
+readme = "README.md"{% if copyright_license != 'none' %}
+license = { text = "{{ copyright_license }}" }{% endif %}
+authors = [
+  { name = "{{ author_username }}", email = "{{ author_email }}" }
+]
+keywords = [
+  "{{ python_package_distribution_name }}"
+]
+dynamic = [ "classifiers" ]
 
-[tool.poetry.dependencies]
+[project.urls]
+homepage = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
+repository = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"
+documentation = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
+
+[tool.poetry]
+packages = [ { include = "{{ python_package_import_name }}", from = "src" } ]
+classifiers = [
+]
+
+[project.dependencies]
 python = "^{{ python_version }}"{% if include_sample_code %}
 torch = "^2.4.0"
 lightning = "^2.4.0"{% endif %}
@@ -60,7 +68,7 @@ optional = true
 ipdb = "^0.13.9"
 line_profiler = "^4.2.0"
 
-[tool.poetry.scripts]
+[project.scripts]
 {{ python_package_command_line_name }} = "{{ python_package_import_name }}.cli:main"
 
 [tool.poetry-dynamic-versioning]
