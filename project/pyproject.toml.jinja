@@ -10,14 +10,14 @@ description = "{{ project_description }}"
 readme = "README.md"{% if copyright_license != 'none' %}
 license = { text = "{{ copyright_license }}" }{% endif %}
 authors = [
-  { name = "{{ author_username }}", email = "{{ author_email }}" }
+    { name = "{{ author_username }}", email = "{{ author_email }}" }
 ]
 keywords = [
-  "{{ python_package_distribution_name }}"
+    "{{ python_package_distribution_name }}"
 ]
 dynamic = [
-  "classifiers",
-  "dependencies"
+    "classifiers",
+    "dependencies"
 ]
 
 [project.urls]
@@ -26,7 +26,9 @@ repository = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ re
 documentation = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
 
 [tool.poetry]
-packages = [ { include = "{{ python_package_import_name }}", from = "src" } ]
+packages = [
+    { include = "{{ python_package_import_name }}", from = "src" }
+]
 classifiers = [
 ]
 
