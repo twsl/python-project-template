@@ -108,7 +108,7 @@ copyright_holder_email:
 copyright_year:
   type: int
   help: The copyright year?
-  default: 2024
+  default: 2025
   when: "{{ custom_install }}"
 
 copyright_license:
