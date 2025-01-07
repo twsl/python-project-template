@@ -15,7 +15,10 @@ authors = [
 keywords = [
   "{{ python_package_distribution_name }}"
 ]
-dynamic = [ "classifiers" ]
+dynamic = [
+  "classifiers",
+  "dependencies"
+]
 
 [project.urls]
 homepage = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
@@ -27,7 +30,7 @@ packages = [ { include = "{{ python_package_import_name }}", from = "src" } ]
 classifiers = [
 ]
 
-[project.dependencies]
+[tool.poetry.dependencies]
 python = "^{{ python_version }}"{% if include_sample_code %}
 torch = "^2.4.0"
 lightning = "^2.4.0"{% endif %}
