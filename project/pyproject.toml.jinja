@@ -42,6 +42,7 @@ ruff = "^0.8.6"
 bandit = "^1.8.0"
 pre-commit = "^4.0.1"
 pyright = "^1.1.391"
+vulture = "^2.14"
 {% if include_notebooks %}ipykernel = "^6.29.5"
 ipywidgets = "^8.1.5"
 ipython = "^8.31.0"
@@ -236,3 +237,9 @@ pythonPlatform = "Linux"
 include = ["src"]
 reportMissingImports = true
 reportMissingTypeStubs = false
+
+[tool.vulture]
+sort_by_size = true
+verbose = false
+min_confidence = 70
+paths = ["src"]
