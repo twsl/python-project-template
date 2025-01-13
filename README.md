@@ -98,7 +98,7 @@ The template uses the following variables to customize the project:
 | `repository_name`                  | `{{ project_name }}`                             |
 | `copyright_holder`                 | `{{ author_username }}`                          |
 | `copyright_holder_email`           | `{{ author_email }}`                             |
-| `copyright_year`                   | `2024`                                           |
+| `copyright_year`                   | `2025`                                           |
 | `copyright_license`                | `MIT`                                            |
 | `python_version`                   | `3.11`                                           |
 | `python_package_distribution_name` | `{{ project_name }}`                             |
