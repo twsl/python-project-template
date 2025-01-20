@@ -74,7 +74,7 @@ jobs:
         run: poetry build
 
       - name: Upload dist
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
         {% raw %}with:
           name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ matrix.python-version }}-${{ github.sha }}
           path: dist/
