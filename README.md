@@ -68,7 +68,7 @@ copier copy --trust git+https://github.com/twsl/python-project-template path/to/
 You can update the template in your destination folder with:
 
 ```bash
-copier update --trust path/to/destination --vcs-ref=HEAD
+copier update --trust -A --vcs-ref=HEAD
 ```
 
 ### Develpment
