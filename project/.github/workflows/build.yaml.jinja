@@ -80,10 +80,18 @@ jobs:
           path: dist/
         if: ${{ always() }}{% endraw %}
 
+      - name: Transform repository name
+        shell: bash # Explicitly specify bash shell for consistency
+        id: transform_name
+        run: |
+          # Get repository name, convert to lowercase, and replace '-' and spaces with '_'
+          transformed=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]' | sed 's/[- ]/_/g')
+          echo "transformed_name=${transformed}" >> $GITHUB_OUTPUT
+
       - name: Run tests
         run: |
-          poetry run pytest -c pyproject.toml --cov={{ python_package_import_name }} --cov-report=html \
-          {% raw %}--cov-report=xml:coverage-${{ runner.os }}-${{ matrix.python-version }}.xml \
+          {% raw %}poetry run pytest -c pyproject.toml --cov=${{ steps.transform_name.outputs.transformed_name }} --cov-report=html \
+          --cov-report=xml:coverage-${{ runner.os }}-${{ matrix.python-version }}.xml \
           --junitxml=junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml \
           --benchmark-disable{% endraw %}
 
