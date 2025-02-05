@@ -81,9 +81,9 @@ jobs:
         if: ${{ always() }}{% endraw %}
 
       - name: Run tests
-        {% raw %}run: |
-          poetry run pytest -c pyproject.toml --cov=${{ github.event.repository.name }} --cov-report=html \
-          --cov-report=xml:coverage-${{ runner.os }}-${{ matrix.python-version }}.xml \
+        run: |
+          poetry run pytest -c pyproject.toml --cov={{ python_package_import_name }} --cov-report=html \
+          {% raw %}--cov-report=xml:coverage-${{ runner.os }}-${{ matrix.python-version }}.xml \
           --junitxml=junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml \
           --benchmark-disable{% endraw %}
 
