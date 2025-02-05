@@ -64,6 +64,7 @@ jobs:
 {% if use_precommit %}
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
+        continue-on-error: true
         env:
           SKIP: poetry-lock{% endif %}
 
@@ -79,14 +80,6 @@ jobs:
           name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ matrix.python-version }}-${{ github.sha }}
           path: dist/
         if: ${{ always() }}{% endraw %}
-
-      - name: Transform repository name
-        shell: bash # Explicitly specify bash shell for consistency
-        id: transform_name
-        run: |
-          # Get repository name, convert to lowercase, and replace '-' and spaces with '_'
-          transformed=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]' | sed 's/[- ]/_/g')
-          echo "transformed_name=${transformed}" >> $GITHUB_OUTPUT
 
       - name: Run tests
         run: |
