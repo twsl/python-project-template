@@ -90,8 +90,8 @@ jobs:
 
       - name: Run tests
         run: |
-          {% raw %}poetry run pytest -c pyproject.toml --cov=${{ steps.transform_name.outputs.transformed_name }} --cov-report=html \
-          --cov-report=xml:coverage-${{ runner.os }}-${{ matrix.python-version }}.xml \
+          poetry run pytest -c pyproject.toml --cov={{ python_package_import_name }} --cov-report=html \
+          {% raw %}--cov-report=xml:coverage-${{ runner.os }}-${{ matrix.python-version }}.xml \
           --junitxml=junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml \
           --benchmark-disable{% endraw %}
 
