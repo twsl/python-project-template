@@ -39,9 +39,9 @@ lightning = "^2.5.0"{% endif %}
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.9.5"
-bandit = "^1.8.2"
+bandit = "^1.8.3"
 pre-commit = "^4.1.0"
-pyright = "^1.1.393"
+pyright = "^1.1.394"
 vulture = "^2.14"
 {% if include_notebooks %}ipykernel = "^6.29.5"
 ipywidgets = "^8.1.5"
@@ -58,11 +58,11 @@ pytest-benchmark = "^5.1.0"
 
 {% if include_docs %}[tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6.1"
-mkdocs-material = "^9.6.3"
+mkdocs-material = "^9.6.5"
 mkdocs-git-revision-date-localized-plugin = "^1.2.9"
 mkdocs-awesome-pages-plugin = "^2.10.1"
 mkdocs-git-authors-plugin = "^0.9.2"
-mkapi = "^4.0.0"
+mkapi = "^4.0.1"
 markdown-callouts = "^0.4.0"
 pygments = "^2.19.0"{% if include_notebooks %}
 mkdocs-jupyter = "^0.25.1"{% endif %}{% endif %}
