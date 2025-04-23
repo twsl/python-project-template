@@ -30,8 +30,6 @@ repos:
         args: [--fix=lf]
       - id: end-of-file-fixer
       - id: trailing-whitespace
-      - id: check-json
-        exclude: devcontainer.json
       - id: check-yaml
       - id: check-toml
       - id: check-docstring-first
@@ -40,6 +38,11 @@ repos:
       - id: check-added-large-files
         args: ["--maxkb=500", "--enforce-all"]
       - id: detect-private-key
+
+  - repo: https://gitlab.com/bmares/check-json5
+    rev: v1.0.0
+    hooks:
+      - id: check-json5
 
   # - repo: https://github.com/aristanetworks/j2lint.git
   #   rev: v1.1.0
