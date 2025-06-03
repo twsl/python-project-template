@@ -280,3 +280,12 @@ self_signed:
     yes: true
     no: false
   when: "{{ custom_install }}"
+
+copier_auto_update:
+  help: Do you add a pipeline to automatically update the copier template (requires setting secrets.GITHUB_TOKEN)?
+  type: bool
+  default: false
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"
