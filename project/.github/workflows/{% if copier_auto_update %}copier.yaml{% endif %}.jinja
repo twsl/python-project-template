@@ -28,7 +28,7 @@ jobs:
         uses: actions/checkout@v4
         {% raw %}with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          token: ${{ secrets.PAT }}{% endraw %}
 
       {% raw %}- name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -108,4 +108,4 @@ jobs:
           body: "This PR updates files via copier. In case of conflicts, the PR will always reflect the latest copier output."
           delete-branch: true
           labels: "dependencies"
-          token: ${{ secrets.GITHUB_TOKEN }}{% endraw %}
+          token: ${{ secrets.PAT }}{% endraw %}
