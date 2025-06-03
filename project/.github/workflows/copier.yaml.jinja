@@ -26,8 +26,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
+        {% raw %}with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}{% endraw %}
 
       {% raw %}- name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
@@ -106,4 +107,5 @@ jobs:
           title: "Automated copier template update to ${{ steps.copier-commit.outputs.commit }}"
           body: "This PR updates files via copier. In case of conflicts, the PR will always reflect the latest copier output."
           delete-branch: true
-          labels: "dependencies"{% endraw %}
+          labels: "dependencies"
+          token: ${{ secrets.GITHUB_TOKEN }}{% endraw %}
