@@ -55,7 +55,7 @@ pytest = "^8.4.0"
 pytest-cov = "^6.1.1"
 pytest-mock = "^3.14.1"
 pytest-cases = "^3.9.1"
-pytest-benchmark = "^5.1.0"
+pytest-benchmark = {extras = ["aspect","histogram"], version = "^5.1.0"}
 pytest-github-actions-annotate-failures = "^0.3.0"
 
 {% if include_docs %}[tool.poetry.group.docs.dependencies]
