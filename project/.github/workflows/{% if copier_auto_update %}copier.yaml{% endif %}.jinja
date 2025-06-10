@@ -11,15 +11,14 @@ concurrency:
 
 jobs:
   copier-update:
-    strategy:
-      matrix:
-        python-version: [{{ python_version }}] # single version deployment
     runs-on: {{ github_runner }}
     permissions:
       contents: write
       pull-requests: write
       actions: write
     strategy:
+      matrix:
+        python-version: [{{ python_version }}] # single version deployment
       fail-fast: true{% if github_rate_limit %}
       max-parallel: 1 # try to to avoid rate limiting{% endif %}
 
