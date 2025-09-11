@@ -22,7 +22,7 @@ copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-te
 
 ### Development features
 
-- Supports `Python 3.9` and higher.
+- Supports `Python 3.10` and [higher](https://devguide.python.org/versions/).
 - [`Poetry`](https://python-poetry.org/) as a dependencies manager. See configuration in `pyproject.toml`.
 - Automatic codestyle with [`ruff`](https://github.com/astral-sh/ruff).
 - Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting.
@@ -111,7 +111,7 @@ The template uses the following variables to customize the project:
 | `include_copilot`                  | `true`                                           |
 | `github_runner_python_version`     | `3.11`                                           |
 | `github_runner`                    | `ubuntu-latest`                                  |
-| `github_runner_ghes`               | `small`                                          |
+| `github_runner_ghec`               | `ubuntu-2core-amd64`                             |
 | `github_rate_limit`                | `false`                                          |
 | `include_sample_code`              | `false`                                          |
 | `self_signed`                      | `false`                                          |

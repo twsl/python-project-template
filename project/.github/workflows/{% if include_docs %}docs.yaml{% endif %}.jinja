@@ -19,8 +19,9 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  ARTIFACT: docs
-{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_ghes] %}{% endif %}
+  artifacts-name: docs
+  python-version: "{{ python_version }}"
+{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_ghec] %}{% endif %}
 jobs:
   build-docs:
     name: Build docs
@@ -31,10 +32,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set up Python
+      {% raw %}- name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v6
         with:
-          python-version: "{{ python_version }}"
+          python-version: ${{ env.python-version }}{% endraw %}
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -46,13 +47,12 @@ jobs:
       - name: Set up cache
         uses: actions/cache@v4
         id: cached-poetry-dependencies
-        with:
+        {% raw %}with:
           path: .venv
-          key: venv-Linux-{{ python_version }}-{% raw %}${{ hashFiles('poetry.lock') }}{% endraw %}
-          restore-keys: venv-Linux-{{ python_version }}-
+          key: venv-${{ runner.os }}-${{ env.python-version }}-${{ hashFiles('poetry.lock') }}
+          restore-keys: venv-${{ runner.os }}-${{ env.python-version }}-{% endraw %}
 
       - name: Install dependencies
-        # if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --all-extras
 
       - name: Build dependencies
@@ -64,9 +64,9 @@ jobs:
         run: poetry run mkdocs build -f ./docs/mkdocs.yml -d ./_build/
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
+        uses: actions/upload-artifact@v4
         {% raw %}with:
-          name: ${{ env.ARTIFACT }}
+          name: ${{ env.artifacts-name }}
           path: ./docs/_build/
         if: ${{ always() }}{% endraw %}
 
@@ -86,15 +86,15 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Download Artifacts
-        uses: actions/download-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v{{ github_action_version -1 }}{% if ghes %}  # cant update yet on GHES{% endif %}
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: {% raw %}artifacts/${{ env.ARTIFACT }}/{% endraw %}
+          path: {% raw %}artifacts/${{ env.artifacts-name }}/{% endraw %}
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
+        uses: actions/deploy-pages@v4

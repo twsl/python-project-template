@@ -4,35 +4,32 @@ on:
   schedule:
     - cron: "0 2 * * *"
   workflow_dispatch:
-{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_ghes] %}{% endif %}{% raw %}
+{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_ghec] %}{% endif %}{% raw %}
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true{% endraw %}
 
+env:
+  python-version: "{{ python_version }}"
+
 jobs:
   copier-update:
+    name: Copier Update
     runs-on: {{ github_runner }}
     permissions:
       contents: write
       pull-requests: write
       actions: write
-    strategy:
-      matrix:
-        python-version: [{{ python_version }}] # single version deployment
-      fail-fast: true{% if github_rate_limit %}
-      max-parallel: 1 # try to to avoid rate limiting{% endif %}
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
-        {% raw %}with:
+        with:
           fetch-depth: 0
-          token: ${{ secrets.PAT }}{% endraw %}
 
-      {% raw %}- name: Set up Python ${{ matrix.python-version }}
+      {% raw %}- name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python-version }}{% endraw %}
+          python-version: ${{ env.python-version }}{% endraw %}
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -49,11 +46,10 @@ jobs:
         id: cached-poetry-dependencies
         {% raw %}with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
-          restore-keys: venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
+          key: venv-${{ runner.os }}-${{ env.python-version }}-${{ hashFiles('poetry.lock') }}
+          restore-keys: venv-${{ runner.os }}-${{ env.python-version }}-{% endraw %}
 
       - name: Install dependencies
-        # if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --all-extras
 
       - name: Run copier update

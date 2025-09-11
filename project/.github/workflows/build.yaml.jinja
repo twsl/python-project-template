@@ -5,7 +5,7 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_ghes] %}{% endif %}{% raw %}
+{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_ghec] %}{% endif %}{% raw %}
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true{% endraw %}
@@ -59,7 +59,6 @@ jobs:
           restore-keys: venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
 
       - name: Install dependencies
-        # if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --all-extras
 {% if use_precommit %}
       - name: Run pre-commit
@@ -72,7 +71,7 @@ jobs:
         run: poetry build
 
       - name: Upload dist
-        uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
+        uses: actions/upload-artifact@v4
         {% raw %}with:
           name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ matrix.python-version }}-${{ github.sha }}
           path: dist/
@@ -99,7 +98,7 @@ jobs:
         if: ${{ always() }}{% endraw %}
 
       - name: Upload test coverage
-        uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
+        uses: actions/upload-artifact@v4
         {% raw %}with:
           name: pytest-coverage-${{ runner.os }}-${{ matrix.python-version }}
           path: code-coverage-results.md
@@ -124,7 +123,7 @@ jobs:
         if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' }}{% endraw %}
 
       - name: Upload test results
-        uses: actions/upload-artifact@v{{ github_action_version }}{% if ghes %}  # cant update yet on GHES{% endif %}
+        uses: actions/upload-artifact@v4
         {% raw %}with:
           name: pytest-results-${{ runner.os }}-${{ matrix.python-version }}
           path: junit/test-results-${{ runner.os }}-${{ matrix.python-version }}.xml

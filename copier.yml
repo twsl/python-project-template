@@ -241,23 +241,11 @@ github_runner:
     SelfHosted: self-hosted
     RoadRunner: road-runner
 
-github_runner_ghes:
-  type: str
-  help: Which additional tags do you want to add to your GHES runner?
-  when: "{{ 'road-runner' in github_runner and ghes }}"
-  default: os-small-amd64-linux
-  choices:
-    Tiny: caas-tiny-amd64-linux
-    Small: os-small-amd64-linux
-    Medium: os-medium-amd64-linux
-    Large: os-large-amd64-linux
-    XL: os-xlarge-amd64-linux
-
 github_runner_ghec:
   type: str
   help: Which additional tags do you want to add to your GHEC runner?
   when: "{{ 'road-runner' in github_runner and ghec }}"
-  default: os-small-amd64-linux
+  default: ubuntu-2core-amd64
   choices:
     Small: ubuntu-2core-amd64
     Medium: ubuntu-4core-amd64
@@ -271,11 +259,6 @@ github_rate_limit:
     yes: true
     no: false
   when: "{{ custom_install and (('road-runner' in github_runner) or ('self-hosted' in github_runner)) }}"
-
-github_action_version:
-  type: int
-  default: "{% if ghes %}3{% else %}4{% endif %}"
-  when: false
 
 include_sample_code:
   help: Do you want include sample code?
