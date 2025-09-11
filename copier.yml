@@ -51,9 +51,14 @@ repository_provider:
   default: github.com
   when: "{{ custom_install }}"
 
+ghec:
+  type: bool
+  default: "{{ 'ghe.com' in repository_provider }}"
+  when: false
+
 ghes:
   type: bool
-  default: "{{ repository_provider != 'github.com' }}"
+  default: "{{ repository_provider != 'github.com' and not ghec }}"
   when: false
 
 primary_branch:
