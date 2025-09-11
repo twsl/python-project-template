@@ -10,7 +10,6 @@
 [![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/twsl/python-project-template/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-
 A generic python project template based on [`copier`](https://copier.readthedocs.io/en/stable/) for my data science focused projects.
 
 ## TL;DR
@@ -112,7 +111,7 @@ The template uses the following variables to customize the project:
 | `include_copilot`                  | `true`                                           |
 | `github_runner_python_version`     | `3.11`                                           |
 | `github_runner`                    | `ubuntu-latest`                                  |
-| `github_runner_onprem`             | `small`                                          |
+| `github_runner_ghes`               | `small`                                          |
 | `github_rate_limit`                | `false`                                          |
 | `include_sample_code`              | `false`                                          |
 | `self_signed`                      | `false`                                          |

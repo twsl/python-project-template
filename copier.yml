@@ -132,7 +132,6 @@ python_version:
   help: What version of python are you targeting?
   default: "3.11"
   choices:
-    - "3.9"
     - "3.10"
     - "3.11"
     - "3.12"
@@ -242,10 +241,10 @@ github_runner:
     SelfHosted: self-hosted
     RoadRunner: road-runner
 
-github_runner_onprem:
+github_runner_ghes:
   type: str
-  help: Which additional tags do you want to add to your onprem runner?
-  when: "{{ 'road-runner' in github_runner }}"
+  help: Which additional tags do you want to add to your GHES runner?
+  when: "{{ 'road-runner' in github_runner and ghes }}"
   default: os-small-amd64-linux
   choices:
     Tiny: caas-tiny-amd64-linux
@@ -253,6 +252,16 @@ github_runner_onprem:
     Medium: os-medium-amd64-linux
     Large: os-large-amd64-linux
     XL: os-xlarge-amd64-linux
+
+github_runner_ghec:
+  type: str
+  help: Which additional tags do you want to add to your GHEC runner?
+  when: "{{ 'road-runner' in github_runner and ghec }}"
+  default: os-small-amd64-linux
+  choices:
+    Small: ubuntu-2core-amd64
+    Medium: ubuntu-4core-amd64
+    Large: ubuntu-8core-amd64
 
 github_rate_limit:
   help: Do you want to prevent Github Actions rate limiting?

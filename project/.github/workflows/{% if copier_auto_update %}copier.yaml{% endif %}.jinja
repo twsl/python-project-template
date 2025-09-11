@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "0 2 * * *"
   workflow_dispatch:
-{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_onprem] %}{% endif %}{% raw %}
+{% if 'road-runner' in github_runner %}{% set github_runner = [github_runner_ghes] %}{% endif %}{% raw %}
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true{% endraw %}
