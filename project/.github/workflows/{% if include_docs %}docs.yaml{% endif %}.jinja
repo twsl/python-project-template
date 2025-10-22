@@ -93,7 +93,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: {% raw %}artifacts/${{ env.artifacts-name }}/{% endraw %}
+          {% raw %}# path: artifacts/${{ env.artifacts-name }}/{% endraw %}
+          path: artifacts/
 
       - name: Deploy to GitHub Pages
         id: deployment
