@@ -71,7 +71,7 @@ jobs:
         run: poetry build
 
       - name: Upload dist
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         {% raw %}with:
           name: ${{ github.event.repository.name }}-${{ runner.os }}-${{ matrix.python-version }}-${{ github.sha }}
           path: dist/
@@ -98,7 +98,7 @@ jobs:
         if: ${{ always() }}{% endraw %}
 
       - name: Upload test coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         {% raw %}with:
           name: pytest-coverage-${{ runner.os }}-${{ matrix.python-version }}
           path: code-coverage-results.md
