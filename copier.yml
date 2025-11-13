@@ -173,6 +173,15 @@ use_precommit:
     no: false
   when: "{{ custom_install }}"
 
+precommit_tool:
+  type: str
+  help: Which pre-commit tooling do you want to use?
+  default: prek
+  choices:
+    pre-commit: pre-commit
+    prek: prek
+  when: "{{ use_precommit }}"
+
 include_docs:
   help: Do you want to include a source code documentation?
   type: bool

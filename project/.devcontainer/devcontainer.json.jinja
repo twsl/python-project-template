@@ -17,8 +17,8 @@
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
-        "ghcr.io/devcontainers-extra/features/actionlint:1": {},
-        "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
+        "ghcr.io/devcontainers-extra/features/actionlint:1": {},{% if use_precommit %}
+        "ghcr.io/devcontainers-extra/features/pre-commit:2": {},{% endif %}
         "ghcr.io/dhoeric/features/act:1": {},
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "version": "latest",
@@ -28,7 +28,7 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "poetry install {% if use_precommit %}&& pre-commit install{% endif %}",
+    "postCreateCommand": "poetry install{% if use_precommit %}{% if precommit_tool == 'pre-commit' %} && pre-commit install{% elif precommit_tool == 'prek' %} && prek install{% endif %}{% endif %}",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.

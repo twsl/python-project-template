@@ -29,4 +29,5 @@ repository_namespace: twsl
 repository_provider: test.ghe.com
 self_signed: false
 use_precommit: true
+precommit_tool: prek
 copier_auto_update: true

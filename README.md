@@ -6,7 +6,6 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](.pre-commit-config.yaml)
 [![Checked with pyright](https://microsoft.github.io/pyright/img/pyright_badge.svg)](https://microsoft.github.io/pyright/)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
-[![vulnerability: safety](https://img.shields.io/badge/vulnerability-safety-yellow.svg)](https://github.com/pyupio/safety)
 [![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/twsl/python-project-template/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
@@ -27,7 +26,7 @@ copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-te
 - Automatic codestyle with [`ruff`](https://github.com/astral-sh/ruff).
 - Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting.
 - Type checks with [`pyright`](https://github.com/microsoft/pyright).
-- Security checks with [`safety`](https://github.com/pyupio/safety) and [`bandit`](https://github.com/PyCQA/bandit).
+- Security checks with [`bandit`](https://github.com/PyCQA/bandit).
 - Testing with [`pytest`](https://docs.pytest.org/en/latest/).
 - Ready-to-use `.editorconfig` and `.gitignore`.
 - Ready-to-use [`Devcontainer`](https://containers.dev/).
