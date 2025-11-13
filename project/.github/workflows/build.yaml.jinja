@@ -59,8 +59,7 @@ jobs:
           restore-keys: venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
 
       - name: Install dependencies
-        run: poetry install --no-interaction --all-extras
-{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}
+        run: poetry install --no-interaction --all-extras{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
@@ -73,12 +72,6 @@ jobs:
         continue-on-error: true
         env:
           SKIP: poetry-lock{% endif %}{% endif %}
-{% if use_precommit %}
-      - name: Run pre-commit
-        uses: pre-commit/action@v3.0.1
-        continue-on-error: true
-        env:
-          SKIP: poetry-lock{% endif %}
 
       - name: Build dependencies
         run: poetry build
