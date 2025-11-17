@@ -11,7 +11,6 @@ github_runner:
   - ubuntu-latest
 github_runner_python_version:
   - "3.11"
-include_copilot: false
 include_databricks: false
 include_docs: true
 include_notebooks: true
