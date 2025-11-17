@@ -104,10 +104,10 @@ The template uses the following variables to customize the project:
 | `python_package_command_line_name` | `{{ project_name }}`                             |
 | `line_ending`                      | `lf`                                             |
 | `use_precommit`                    | `true`                                           |
+| `precommit_tool`                   | `prek`                                           |
 | `include_docs`                     | `true`                                           |
 | `include_notebooks`                | `true`                                           |
 | `include_databricks`               | `true`                                           |
-| `include_copilot`                  | `true`                                           |
 | `github_runner_python_version`     | `3.11`                                           |
 | `github_runner`                    | `ubuntu-latest`                                  |
 | `github_runner_ghec`               | `ubuntu-2core-amd64`                             |
