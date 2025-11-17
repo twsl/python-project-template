@@ -209,15 +209,6 @@ include_databricks:
     no: false
   when: "{{ custom_install }}"
 
-include_copilot:
-  help: Do you want use Github CoPilot?
-  type: bool
-  default: false
-  choices:
-    yes: true
-    no: false
-  when: "{{ custom_install }}"
-
 github_runner_python_version:
   type: str
   help: Which Python versions do you want to use on your Github Runner?
