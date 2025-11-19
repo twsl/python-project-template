@@ -22,7 +22,8 @@ jobs:
           script:{% raw %} |
             const owner = context.repo.owner;
             const repo = context.repo.repo;
-            const branchRef = 'refs/heads/copier/update';
+            const fullRef = 'refs/heads/copier/update';
+            const branchRef = fullRef.replace(/^refs\//, '');
 
             try {
               await github.rest.git.deleteRef({ owner, repo, ref: branchRef });
