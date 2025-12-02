@@ -251,6 +251,15 @@ github_runner_ghec:
     Medium: ubuntu-4core-amd64
     Large: ubuntu-8core-amd64
 
+github_runner_clean:
+  type: bool
+  help: Do you want to clean space on your runner (only supported on Linux runners)?
+  default: false
+  choices:
+    yes: true
+    no: false
+  when: "{{ custom_install }}"
+
 github_rate_limit:
   help: Do you want to prevent Github Actions rate limiting?
   type: bool

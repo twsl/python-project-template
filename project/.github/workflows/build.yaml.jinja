@@ -32,10 +32,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          fetch-depth: 0{% if github_runner_clean %}
 
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@main
+      - name: Free Disk Space
+        if: runner.os == 'Linux'
+        uses: jlumbroso/free-disk-space@main{% endif %}
 
       {% raw %}- name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6

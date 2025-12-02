@@ -30,3 +30,4 @@ self_signed: false
 use_precommit: true
 precommit_tool: prek
 copier_auto_update: true
+github_runner_clean: false
