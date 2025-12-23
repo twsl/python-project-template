@@ -38,7 +38,7 @@ torch = "^2.9.0"
 lightning = "^2.6.0"{% endif %}
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.14.9"
+ruff = "^0.14.10"
 bandit = "^1.9.2"{% if use_precommit %}
 {% if precommit_tool == 'pre-commit' %}pre-commit = "^4.5.0"{% elif precommit_tool == 'prek' %}prek = "^0.2.21"{% endif %}{% endif %}
 pyright = "^1.1.407"
