@@ -34,11 +34,11 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^{{ python_version }}"{% if include_sample_code %}
-torch = "^2.9.0"
+torch = "^2.9.1"
 lightning = "^2.6.0"{% endif %}
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.14.10"
+ruff = "^0.14.11"
 bandit = "^1.9.2"{% if use_precommit %}
 {% if precommit_tool == 'pre-commit' %}pre-commit = "^4.5.0"{% elif precommit_tool == 'prek' %}prek = "^0.2.27"{% endif %}{% endif %}
 pyright = "^1.1.407"
@@ -46,7 +46,7 @@ vulture = "^2.14"
 copier = "^9.11.1"
 {% if include_notebooks %}ipykernel = "^6.31.0"
 ipywidgets = "^8.1.8"
-ipython = "^9.8.0"
+ipython = "^9.9.0"
 jupytext = "^1.18.1"
 nbconvert = "^7.16.6"{% endif %}
 
