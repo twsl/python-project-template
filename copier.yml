@@ -254,7 +254,7 @@ github_runner_ghec:
 github_runner_clean:
   type: bool
   help: Do you want to clean space on your runner (only supported on Linux runners)?
-  default: false
+  default: true
   choices:
     yes: true
     no: false
