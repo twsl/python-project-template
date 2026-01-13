@@ -35,7 +35,7 @@ jobs:
           fetch-depth: 0{% if github_runner_clean %}
 
       - name: Free Disk Space
-        uses: gha-free-disk-space@main{% endif %}
+        uses: twsl/gha-free-disk-space@main{% endif %}
 
       {% raw %}- name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
