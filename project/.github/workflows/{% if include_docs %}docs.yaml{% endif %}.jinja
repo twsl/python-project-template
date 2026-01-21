@@ -61,12 +61,6 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-interaction --all-extras
 
-      - name: Dynamic versioning
-        run: poetry self add "poetry-dynamic-versioning[plugin]"
-
-      - name: Enable dynamic versioning
-        run: poetry dynamic-versioning enable
-
       - name: Check poetry
         run: |
           poetry check
