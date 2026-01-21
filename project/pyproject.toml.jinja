@@ -58,7 +58,7 @@ dev = [
     "bandit>=1.9.3",{% if use_precommit %}
     {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.2.30"{% endif %},{% endif %}
     "vulture>=2.14",
-    "copier>=9.11.1",{% if include_notebooks %}
+    "copier>=9.11.2",{% if include_notebooks %}
     "ipykernel>=6.31.0",
     "ipywidgets>=8.1.8",
     "ipython>=9.9.0",
