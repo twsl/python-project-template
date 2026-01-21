@@ -9,12 +9,12 @@
         "args": {
             "VARIANT": "{{ python_version }}-bookworm"
         }
-    },{% if self_signed %}
-    // https://github.com/microsoft/vscode-remote-release/issues/6092
+    },
     "remoteEnv": {
-        "NODE_TLS_REJECT_UNAUTHORIZED": "0",{% if package_manager == 'uv'%}
+        {% if self_signed %}// https://github.com/microsoft/vscode-remote-release/issues/6092
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0",{% endif %}{% if package_manager == 'uv'%}
         "UV_SYSTEM_PYTHON": "1"{% endif %}
-    },{% endif %}
+    },
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
