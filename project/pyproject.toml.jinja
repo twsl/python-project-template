@@ -45,7 +45,6 @@ python = "^{{ python_version }}"
 {% elif package_manager == 'uv'%}[tool.uv]
 default-groups = [
     "dev",
-    "spark",
     "test",{% if include_docs %}
     "docs",{% endif %}
     "debug"
