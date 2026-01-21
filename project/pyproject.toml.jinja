@@ -281,13 +281,18 @@ quote-style = "double"
 
 [tool.bandit.assert_used]
 skips = ['*_test.py', '*/test_*.py']
-
+{% if type_checker == 'pyright' %}
 [tool.pyright]
 pythonVersion = "{{ python_version }}"
 pythonPlatform = "Linux"
 include = ["src"]
 reportMissingImports = true
-reportMissingTypeStubs = false
+reportMissingTypeStubs = false{% elif type_checker == 'ty' %}
+[tool.ty.environment]
+python-version = "{{ python_version }}"
+python-platform = "linux"
+root = ["./src"]
+{% endif %}
 
 [tool.pre-commit-update.yaml]
 mapping = 2
