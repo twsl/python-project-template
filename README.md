@@ -84,7 +84,11 @@ The devcontainer is already set up for you, just open the project in VSCode and 
 To test the project you can run:
 
 ```bash
-copier copy ./ ./dist --data-file "./.github/assets/.copier-answers.yml" -f --vcs-ref=HEAD
+copier copy ./ ./dist --data-file "./.github/assets/.copier-answers-uv.yml" -f --vcs-ref=HEAD
+```
+
+```bash
+copier copy ./ ./dist --data-file "./.github/assets/.copier-answers-poetry.yml" -f --vcs-ref=HEAD
 ```
 
 ### Variables
