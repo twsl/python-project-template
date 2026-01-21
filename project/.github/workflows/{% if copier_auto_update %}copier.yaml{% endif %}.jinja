@@ -75,7 +75,7 @@ jobs:
           cache-dependency-glob: "**/uv.lock"
 
       - name: Install sdl dependencies
-        run: uv sync --all-groups --all-extras --no-interaction
+        run: uv sync --all-groups --all-extras
 
       - name: Build dependencies
         run: uv build
