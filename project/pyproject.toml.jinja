@@ -43,12 +43,13 @@ packages = [
 [tool.poetry.dependencies]
 python = "^{{ python_version }}"
 {% elif package_manager == 'uv'%}[tool.uv]
-default-groups = [
-    "dev",
-    "test",{% if include_docs %}
-    "docs",{% endif %}
-    "debug"
-]{% endif %}
+default-groups = "all"
+# default-groups = [
+#     "dev",
+#     "test",{% if include_docs %}
+#     "docs",{% endif %}
+#     "debug"
+# ]{% endif %}
 
 [dependency-groups]
 dev = [
@@ -184,7 +185,7 @@ exclude_lines = [
 ]
 
 [tool.ruff]
-line-length = 120  # Must agree with Black
+line-length = 120
 extend-include = ["*.ipynb"]
 exclude = [
     "migrations",
