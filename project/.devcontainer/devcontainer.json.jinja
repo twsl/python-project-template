@@ -12,7 +12,8 @@
     },{% if self_signed %}
     // https://github.com/microsoft/vscode-remote-release/issues/6092
     "remoteEnv": {
-        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0",{% if package_manager == 'uv'%}
+        "UV_SYSTEM_PYTHON": "1"{% endif %}
     },{% endif %}
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
@@ -28,7 +29,8 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "poetry install{% if use_precommit %}{% if precommit_tool == 'pre-commit' %} && pre-commit install{% elif precommit_tool == 'prek' %} && prek install{% endif %}{% endif %}",
+    "postCreateCommand": "{% if package_manager == 'poetry' %}poetry install{% elif package_manager == 'uv'%}uv sync --all-groups --all-extras{% endif %}",
+    "postStartCommand": "{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}pre-commit install{% elif precommit_tool == 'prek' %}{% if package_manager == 'uv'%}uv tool install prek && {% endif %}prek install{% endif %}{% endif %}",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
@@ -45,7 +47,7 @@
                 "python.pythonPath": "/usr/local/bin/python",
                 "python.envFile": "${workspaceFolder}/.env",
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
-                "python.languageServer": "Pylance",
+                "python.languageServer": {% if type_checker == 'pyright' %}"Pylance"{% elif type_checker == 'ty' %}"None"{% endif %},
                 "python.autoComplete.addBrackets": true,
                 "python.analysis.autoImportCompletions": true,
                 "python.analysis.completeFunctionParens": true,
@@ -95,7 +97,7 @@
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "ms-python.python",
-                "ms-python.vscode-pylance",
+                {% if type_checker == 'pyright' %}"ms-python.vscode-pylance"{% elif type_checker == 'ty' %}"astral-sh.ty"{% endif %},
                 "ms-toolsai.jupyter",
                 "GitHub.copilot",
                 "GitHub.copilot-chat",
@@ -114,6 +116,7 @@
                 "njpwerner.autodocstring",
                 "rodolphebarbanneau.python-docstring-highlighter",
                 "mechatroner.rainbow-csv",
+                "oderwat.indent-rainbow",
                 "uctakeoff.vscode-counter",
                 "bierner.github-markdown-preview",
                 "yahyabatulu.vscode-markdown-alert",

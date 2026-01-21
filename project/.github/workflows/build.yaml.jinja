@@ -35,13 +35,13 @@ jobs:
           fetch-depth: 0{% if github_runner_clean %}
 
       - name: Free Disk Space
-        uses: twsl/gha-free-disk-space@main{% endif %}
+        uses: twsl/gha-free-disk-space@v1{% endif %}
 
       {% raw %}- name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
-#          cache: 'poetry'{% endraw %}
+#          cache: 'poetry'{% endraw %}{% if package_manager == 'poetry' %}
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -62,7 +62,16 @@ jobs:
           restore-keys: venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
 
       - name: Install dependencies
-        run: poetry install --no-interaction --all-extras{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}
+        run: poetry install --no-interaction --all-extras{% elif package_manager == 'uv'%}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: "**/uv.lock"
+
+      - name: Install sdl dependencies
+        run: uv sync --all-groups --all-extras --no-interaction{%endif %}{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}
 
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
@@ -74,10 +83,13 @@ jobs:
         uses: j178/prek-action@v1
         continue-on-error: true
         env:
-          SKIP: poetry-lock{% endif %}{% endif %}
+          SKIP: poetry-lock{% endif %}{% endif %}{% if package_manager == 'poetry'%}
 
       - name: Build dependencies
-        run: poetry build
+        run: poetry build{% elif package_manager == 'uv'%}
+
+      - name: Build dependencies
+        run: uv build{% endif %}
 
       - name: Upload dist
         uses: actions/upload-artifact@v6
