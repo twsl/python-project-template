@@ -2,4 +2,4 @@
 
 Put your notebooks here
 
-- {ref}`intro_notebook.ipynb`
+- [intro_notebook.ipynb](intro_notebook.ipynb)
