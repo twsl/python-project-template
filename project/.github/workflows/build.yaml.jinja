@@ -70,7 +70,7 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "**/uv.lock"
 
-      - name: Install sdl dependencies
+      - name: Install dependencies
         run: uv sync --all-groups --all-extras{%endif %}{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}
 
       - name: Run pre-commit
