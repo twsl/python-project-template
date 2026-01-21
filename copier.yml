@@ -113,7 +113,7 @@ copyright_holder_email:
 copyright_year:
   type: int
   help: The copyright year?
-  default: 2025
+  default: 2026
   when: "{{ custom_install }}"
 
 copyright_license:
@@ -129,8 +129,8 @@ copyright_license:
 # https://devguide.python.org/versions/
 python_version:
   type: str
-  help: What version of python are you targeting?
-  default: "3.11"
+  help: What version of python are you targeting? See https://devguide.python.org/versions/
+  default: "3.12"
   choices:
     - "3.10"
     - "3.11"
@@ -163,6 +163,24 @@ line_ending:
   choices:
     LF: lf
     CLRF: crlf
+
+package_manager:
+  type: str
+  help: Which Python package and project manager do you want to use?
+  default: uv
+  choices:
+    uv: uv
+    poetry: poetry
+  when: "{{ custom_install }}"
+
+type_checker:
+  type: str
+  help: Which Python type checker do you want to use?
+  default: ty
+  choices:
+    pyright: pyright
+    ty: ty
+  when: "{{ custom_install }}"
 
 use_precommit:
   type: bool

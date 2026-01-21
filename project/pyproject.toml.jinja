@@ -1,10 +1,11 @@
-[build-system]
+[build-system]{% if package_manager == 'poetry' %}
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
-build-backend = "poetry_dynamic_versioning.backend"
-
+build-backend = "poetry_dynamic_versioning.backend"{% elif package_manager == 'uv'%}
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+{% endif %}
 [project]
 name = "{{ python_package_distribution_name }}"
-version = "0.0.0"
 requires-python = ">={{ python_version }}"
 description = "{{ project_description }}"
 readme = "README.md"{% if copyright_license != 'none' %}
@@ -15,90 +16,137 @@ authors = [
 keywords = [
     "{{ python_package_distribution_name }}"
 ]
-dynamic = [
-    "classifiers",
-    "dependencies"
+classifiers = [
 ]
+dynamic = [
+    "version"
+]
+dependencies = [{% if include_sample_code %}
+    "torch>=2.9.1"
+    "lightning>=2.6.0"{% endif %}
+]
+
+[project.optional-dependencies]
+extra = []
 
 [project.urls]
 homepage = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
 repository = "https://{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"
 documentation = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
 
-[tool.poetry]
+{% if package_manager == 'poetry' %}[tool.poetry]
+version = "0.0.0"
 packages = [
     { include = "{{ python_package_import_name }}", from = "src" }
 ]
-classifiers = [
-]
 
 [tool.poetry.dependencies]
-python = "^{{ python_version }}"{% if include_sample_code %}
-torch = "^2.9.1"
-lightning = "^2.6.0"{% endif %}
+python = "^{{ python_version }}"
+{% elif package_manager == 'uv'%}[tool.uv]
+default-groups = "all"
+# default-groups = [
+#     "dev",
+#     "test",{% if include_docs %}
+#     "docs",{% endif %}
+#     "debug"
+# ]{% endif %}
 
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.14.13"
-bandit = "^1.9.3"{% if use_precommit %}
-{% if precommit_tool == 'pre-commit' %}pre-commit = "^4.5.0"{% elif precommit_tool == 'prek' %}prek = "^0.2.30"{% endif %}{% endif %}
-pyright = "^1.1.408"
-vulture = "^2.14"
-copier = "^9.11.1"
-{% if include_notebooks %}ipykernel = "^6.31.0"
-ipywidgets = "^8.1.8"
-ipython = "^9.9.0"
-jupytext = "^1.18.1"
-nbconvert = "^7.16.6"{% endif %}
-
-[tool.poetry.group.test.dependencies]
-pytest = "^9.0.2"
-pytest-cov = "^7.0.0"
-pytest-mock = "^3.15.1"
-pytest-cases = "^3.9.1"
-pytest-benchmark = {extras = ["aspect","histogram"], version = "^5.2.3"}
-pytest-github-actions-annotate-failures = "^0.3.0"
-
-{% if include_docs %}[tool.poetry.group.docs.dependencies]
-mkdocs = "^1.6.1"
-mkdocs-material = "^9.7.1"
-mkdocs-git-revision-date-localized-plugin = "^1.5.0"
-mkdocs-awesome-nav = "^3.3.0"
-mkdocs-git-authors-plugin = "^0.10.0"
-mkapi = "^4.5.0"
-markdown-callouts = "^0.4.0"
-pymdown-extensions = "^10.20"
-pygments = "^2.19.0"{% if include_notebooks %}
-mkdocs-jupyter = "^0.25.1"{% endif %}{% endif %}
-
-[tool.poetry.group.debug]
-optional = true
-
-[tool.poetry.group.debug.dependencies]
-ipdb = "^0.13.9"
-line_profiler = "^5.0.0"
+[dependency-groups]
+dev = [
+    "ruff>=0.14.13",
+    {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.12"{% endif %},
+    "bandit>=1.9.3",{% if use_precommit %}
+    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.2.30"{% endif %},{% endif %}
+    "vulture>=2.14",
+    "copier>=9.11.1",{% if include_notebooks %}
+    "ipykernel>=6.31.0",
+    "ipywidgets>=8.1.8",
+    "ipython>=9.9.0",
+    "jupytext>=1.18.1",
+    "nbconvert>=7.16.6",{% endif %}
+]
+test = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "pytest-mock>=3.15.1",
+    "pytest-cases>=3.9.1",
+    "pytest-benchmark[aspect,histogram]>=5.2.3",
+    "pytest-github-actions-annotate-failures>=0.3.0",
+]{% if include_docs %}
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.1",
+    "mkdocs-git-revision-date-localized-plugin>=1.5.0",
+    "mkdocs-awesome-nav>=3.3.0",
+    "mkdocs-git-authors-plugin>=0.10.0",
+    "mkapi>=4.5.0",
+    "markdown-callouts>=0.4.0",
+    "pymdown-extensions>=10.20",
+    "pygments>=2.19.0",{% if include_notebooks %}
+    "mkdocs-jupyter>=0.25.1",{% endif %}
+]{% endif %}
+debug = [
+    "ipdb>=0.13.9",
+    "line-profiler>=5.0.0",
+]
 
 [project.scripts]
 {{ python_package_command_line_name }} = "{{ python_package_import_name }}.cli:main"
 
+{% if package_manager == 'poetry' %}[tool.poetry.requires-plugins]
+poetry-dynamic-versioning = { version = ">=1.0.0,<2.0.0", extras = ["plugin"] }
+
+[tool.poetry-dynamic-versioning.substitution]
+folders = [
+    { path = "src/{{ python_package_import_name }}" }
+]
+patterns = [
+    '''(^__version__\s*(?::.*?)?=\s*['"])[^'"]*(['"])''',
+]
+
+# https://github.com/mtkennerly/poetry-dynamic-versioning
 [tool.poetry-dynamic-versioning]
-enable = false
+enable = true
 vcs = "git"
 style = "semver"
 pattern = "default-unprefixed"
 
-[tool.poetry-dynamic-versioning.substitution]
-folders = [
-  { path = "src/{{ python_package_import_name }}" }
-]
-
 [tool.poetry-dynamic-versioning.files."src/{{ python_package_import_name }}/__about__.py"]
 persistent-substitution = false
 initial-content = """
-# file generated by poetry dynamic versioning during poetry build/install
-# don't change, don't track in version control
-__version__ = "0.0.0"
-__version_tuple__ = (0, 0, 0)
+# file generated by dynamic versioning during build when enabled
+__version__ = "1.0.0"
 """
+{% elif package_manager == 'uv'%}[tool.hatch.build.targets.sdist]
+include = ["src/{{ python_package_import_name }}"]
+
+[tool.hatch.build.targets.wheel]
+include = ["src/{{ python_package_import_name }}"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/{{ python_package_import_name }}" = "{{ python_package_import_name }}"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.uv-dynamic-versioning.substitution]
+folders = [
+    { path = "src/{{ python_package_import_name }}" }
+]
+
+# https://github.com/ninoseki/uv-dynamic-versioning
+[tool.uv-dynamic-versioning]
+vcs = "git"
+style = "semver"
+pattern = "default-unprefixed"
+fallback-version = "1.0.0"
+
+[tool.hatch.build.hooks.version]
+path = "src/{{ python_package_import_name }}/__about__.py"
+template = '''
+# file generated by dynamic versioning during build when enabled
+__version__ = "{version}"
+'''{% endif %}
 
 [tool.pytest.ini_options]
 minversion = "8.0"
@@ -137,7 +185,7 @@ exclude_lines = [
 ]
 
 [tool.ruff]
-line-length = 120  # Must agree with Black
+line-length = 120
 extend-include = ["*.ipynb"]
 exclude = [
     "migrations",
@@ -234,13 +282,18 @@ quote-style = "double"
 
 [tool.bandit.assert_used]
 skips = ['*_test.py', '*/test_*.py']
-
+{% if type_checker == 'pyright' %}
 [tool.pyright]
 pythonVersion = "{{ python_version }}"
 pythonPlatform = "Linux"
 include = ["src"]
 reportMissingImports = true
-reportMissingTypeStubs = false
+reportMissingTypeStubs = false{% elif type_checker == 'ty' %}
+[tool.ty.environment]
+python-version = "{{ python_version }}"
+python-platform = "linux"
+root = ["./src"]
+{% endif %}
 
 [tool.pre-commit-update.yaml]
 mapping = 2

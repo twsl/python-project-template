@@ -1,20 +1,26 @@
 # Python Project Template
 
 [![Copier](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/copier-org/copier/master/img/badge/badge-grayscale-border.json)](https://github.com/copier-org/copier)
-[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
+[![Docs with MkDocs](https://img.shields.io/badge/MkDocs-docs?style=flat&logo=materialformkdocs&logoColor=white&color=%23526CFE)](https://squidfunk.github.io/mkdocs-material/)
 [![linting: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](.pre-commit-config.yaml)
-[![Checked with pyright](https://microsoft.github.io/pyright/img/pyright_badge.svg)](https://microsoft.github.io/pyright/)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 [![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/twsl/python-project-template/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 A generic python project template based on [`copier`](https://copier.readthedocs.io/en/stable/) for my data science focused projects.
 
+- Package Manager: [![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv) or [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
+- pre-commit: [![prek](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/j178/prek/master/docs/assets/badge-v0.json)](https://github.com/j178/prek) or [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+- Type checker: [![ty](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ty/main/assets/badge/v0.json)](https://github.com/astral-sh/ty) or [![Checked with pyright](https://microsoft.github.io/pyright/img/pyright_badge.svg)](https://microsoft.github.io/pyright/)
+
 ## TL;DR
 
 ```bash
-copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-template path/to/destination
+pip install copier
+```
+
+```bash
+copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-template /path/to/destination
 ```
 
 ## Features
@@ -22,14 +28,16 @@ copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-te
 ### Development features
 
 - Supports `Python 3.10` and [higher](https://devguide.python.org/versions/).
-- [`Poetry`](https://python-poetry.org/) as a dependencies manager. See configuration in `pyproject.toml`.
+- [`uv`](https://github.com/astral-sh/uv) or [`Poetry`](https://python-poetry.org/) as a dependencies manager. See configuration in `pyproject.toml`.
 - Automatic codestyle with [`ruff`](https://github.com/astral-sh/ruff).
-- Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting.
-- Type checks with [`pyright`](https://github.com/microsoft/pyright).
+- Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting. Execute with [`prek`](https://github.com/j178/prek) or [`pre-commit`](https://github.com/pre-commit/pre-commit)
+- Type checks with [`ty`](https://github.com/astral-sh/ty) or [`pyright`](https://github.com/microsoft/pyright).
 - Security checks with [`bandit`](https://github.com/PyCQA/bandit).
 - Testing with [`pytest`](https://docs.pytest.org/en/latest/).
 - Ready-to-use `.editorconfig` and `.gitignore`.
 - Ready-to-use [`Devcontainer`](https://containers.dev/).
+- Find dead code with [`vulture`](https://github.com/jendrikseipp/vulture).
+- Avoid credential leaks with [`gitleaks`](https://github.com/gitleaks/gitleaks).
 
 ### Deployment features
 
@@ -76,7 +84,11 @@ The devcontainer is already set up for you, just open the project in VSCode and 
 To test the project you can run:
 
 ```bash
-copier copy ./ ./dist --data-file "./.github/assets/.copier-answers.yml" -f --vcs-ref=HEAD
+copier copy ./ ./dist --data-file "./.github/assets/.copier-answers-uv.yml" -f --vcs-ref=HEAD
+```
+
+```bash
+copier copy ./ ./dist --data-file "./.github/assets/.copier-answers-poetry.yml" -f --vcs-ref=HEAD
 ```
 
 ### Variables
@@ -88,6 +100,9 @@ The template uses the following variables to customize the project:
 | `custom_install`                   | `customized`                                     |
 | `project_name`                     | `example_project`                                |
 | `project_description`              | ``                                               |
+| `repository_provider`              | `github.com`                                     |
+| `ghec`                             | `false`                                          |
+| `ghes`                             | `false`                                          |
 | `primary_branch`                   | `main`                                           |
 | `author_username`                  | ``                                               |
 | `author_email`                     | `{{ author_username }}@users.noreply.github.com` |
@@ -96,32 +111,27 @@ The template uses the following variables to customize the project:
 | `repository_name`                  | `{{ project_name }}`                             |
 | `copyright_holder`                 | `{{ author_username }}`                          |
 | `copyright_holder_email`           | `{{ author_email }}`                             |
-| `copyright_year`                   | `2025`                                           |
+| `copyright_year`                   | `2026`                                           |
 | `copyright_license`                | `MIT`                                            |
-| `python_version`                   | `3.11`                                           |
+| `python_version`                   | `3.12`                                           |
 | `python_package_distribution_name` | `{{ project_name }}`                             |
 | `python_package_import_name`       | `{{ project_name }}`                             |
 | `python_package_command_line_name` | `{{ project_name }}`                             |
 | `line_ending`                      | `lf`                                             |
+| `package_manager`                  | `uv`                                             |
+| `type_checker`                     | `ty`                                             |
 | `use_precommit`                    | `true`                                           |
 | `precommit_tool`                   | `prek`                                           |
 | `include_docs`                     | `true`                                           |
 | `include_notebooks`                | `true`                                           |
-| `include_databricks`               | `true`                                           |
-| `github_runner_python_version`     | `3.11`                                           |
+| `include_databricks`               | `false`                                          |
+| `github_runner_python_version`     | `[3.12]`                                         |
 | `github_runner`                    | `ubuntu-latest`                                  |
 | `github_runner_ghec`               | `ubuntu-2core-amd64`                             |
+| `github_runner_clean`              | `true`                                           |
 | `github_rate_limit`                | `false`                                          |
 | `include_sample_code`              | `false`                                          |
 | `self_signed`                      | `false`                                          |
+| `copier_auto_update`               | `false`                                          |
 
 All input values will be saved in the `.copier-answers.yml`
-
-## Credits
-
-I just combined multiple templates to create this one, therefore all credits belong to the following projects:
-
-- [poetry-copier](https://github.com/lukin0110/poetry-copier)
-- [python-project-template](https://github.com/lincc-frameworks/python-project-template)
-- [copier-poetry](https://github.com/pawamoy/copier-poetry)
-- [python-package-template](https://github.com/TezRomacH/python-package-template)

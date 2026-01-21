@@ -19,12 +19,12 @@ jobs:
           fetch-depth: 0{% if github_runner_clean %}
 
       - name: Free Disk Space
-        uses: twsl/gha-free-disk-space@main{% endif %}
+        uses: twsl/gha-free-disk-space@v1{% endif %}
 
       {% raw %}- name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v6
         with:
-          python-version: ${{ env.python-version }}{% endraw %}
+          python-version: ${{ env.python-version }}{% endraw %}{% if package_manager == 'poetry' %}
 
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -33,22 +33,19 @@ jobs:
           virtualenvs-in-project: true
           virtualenvs-path: .venv
 
+      - name: Add poetry to path
+        run: echo "$(poetry env info --path)/bin" >> $GITHUB_PATH
+
       - name: Set up cache
         uses: actions/cache@v5
         id: cached-poetry-dependencies
         {% raw %}with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ env.python-version }}-${{ hashFiles('poetry.lock') }}
-          restore-keys: venv-${{ runner.os }}-${{ env.python-version }}-{% endraw %}
+          key: venv-${{ runner.os }}-${{ matrix.python-version }}-${{ hashFiles('poetry.lock') }}
+          restore-keys: venv-${{ runner.os }}-${{ matrix.python-version }}-{% endraw %}
 
       - name: Install dependencies
         run: poetry install --no-interaction --all-extras
-
-      - name: Dynamic versioning
-        run: poetry self add "poetry-dynamic-versioning[plugin]"
-
-      - name: Enable dynamic versioning
-        run: poetry dynamic-versioning enable
 
       - name: Check poetry
         run: |
@@ -56,7 +53,19 @@ jobs:
 
       - name: Build
         run: |
-          poetry build
+          poetry build{% elif package_manager == 'uv'%}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: "**/uv.lock"
+
+      - name: Install sdl dependencies
+        run: uv sync --all-groups --all-extras --no-interaction
+
+      - name: Build dependencies
+        run: uv build{%endif %}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v6

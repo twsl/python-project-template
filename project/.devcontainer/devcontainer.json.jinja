@@ -9,11 +9,15 @@
         "args": {
             "VARIANT": "{{ python_version }}-bookworm"
         }
-    },{% if self_signed %}
-    // https://github.com/microsoft/vscode-remote-release/issues/6092
-    "remoteEnv": {
-        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
-    },{% endif %}
+    },
+    "remoteEnv": {% raw %}{{% endraw %}{% if self_signed %}// https://github.com/microsoft/vscode-remote-release/issues/6092
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0",{% endif %}{% if package_manager == 'poetry' %}
+        "POETRY_DYNAMIC_VERSIONING_BYPASS": "1.0.0"{% elif package_manager == 'uv'%}
+        "UV_SYSTEM_PYTHON": "1",
+        "UV_PROJECT_ENVIRONMENT": "/usr/local",
+        // Disable dynamic versioning during development
+        "UV_DYNAMIC_VERSIONING_BYPASS": "1.0.0"{% endif %}
+    },
     // Features to add to the dev container. More info: https://containers.dev/features.
     "features": {
         "ghcr.io/devcontainers/features/git:1": {},
@@ -28,7 +32,8 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "poetry install{% if use_precommit %}{% if precommit_tool == 'pre-commit' %} && pre-commit install{% elif precommit_tool == 'prek' %} && prek install{% endif %}{% endif %}",
+    "postCreateCommand": "{% if package_manager == 'poetry' %}poetry install{% elif package_manager == 'uv'%}uv sync --all-groups --all-extras{% endif %}",
+    "postStartCommand": "{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}pre-commit install{% elif precommit_tool == 'prek' %}{% if package_manager == 'uv'%}uv tool install prek && {% endif %}prek install{% endif %}{% endif %}",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
@@ -45,7 +50,7 @@
                 "python.pythonPath": "/usr/local/bin/python",
                 "python.envFile": "${workspaceFolder}/.env",
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
-                "python.languageServer": "Pylance",
+                "python.languageServer": {% if type_checker == 'pyright' %}"Pylance"{% elif type_checker == 'ty' %}"None"{% endif %},
                 "python.autoComplete.addBrackets": true,
                 "python.analysis.autoImportCompletions": true,
                 "python.analysis.completeFunctionParens": true,
@@ -54,7 +59,6 @@
                 "python.analysis.inlayHints.variableTypes": true,
                 "python.analysis.inlayHints.functionReturnTypes": true,
                 "python.analysis.diagnosticMode": "workspace",
-                "python.analysis.typeCheckingMode": "strict",
                 "python.sortImports": true,
                 "python.testing.autoTestDiscoverOnSaveEnabled": false,
                 "python.testing.unittestEnabled": false,
@@ -78,8 +82,6 @@
                     "notebook.source.fixAll": "explicit",
                     "notebook.source.organizeImports": "explicit"
                 },
-                "testExplorer.codeLens": true,
-                "testExplorer.gutterDecoration": true,
                 "git.enableSmartCommit": true,
                 "git.autofetch": true,
                 "autoDocstring.docstringFormat": "google-notypes",
@@ -95,7 +97,7 @@
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "ms-python.python",
-                "ms-python.vscode-pylance",
+                {% if type_checker == 'pyright' %}"ms-python.vscode-pylance"{% elif type_checker == 'ty' %}"astral-sh.ty"{% endif %},
                 "ms-toolsai.jupyter",
                 "GitHub.copilot",
                 "GitHub.copilot-chat",
@@ -114,6 +116,7 @@
                 "njpwerner.autodocstring",
                 "rodolphebarbanneau.python-docstring-highlighter",
                 "mechatroner.rainbow-csv",
+                "oderwat.indent-rainbow",
                 "uctakeoff.vscode-counter",
                 "bierner.github-markdown-preview",
                 "yahyabatulu.vscode-markdown-alert",
