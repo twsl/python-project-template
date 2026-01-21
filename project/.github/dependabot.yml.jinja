@@ -4,12 +4,7 @@
 
 version: 2
 
-updates:
-  - package-ecosystem: gitsubmodule
-    directory: /
-    schedule:
-      interval: weekly{% if repository_provider == "github.com"%}
-
+updates:{% if repository_provider == "github.com"%}
   - package-ecosystem: devcontainers
     directory: /
     schedule:
