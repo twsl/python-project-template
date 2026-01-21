@@ -76,8 +76,7 @@ jobs:
       - name: Run pre-commit
         uses: pre-commit/action@v3
         continue-on-error: true
-        env:
-          SKIP: poetry-lock{% elif precommit_tool == 'prek' %}
+        env:{% elif precommit_tool == 'prek' %}
 
       - name: Run prek
         uses: j178/prek-action@v1

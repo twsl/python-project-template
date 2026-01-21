@@ -10,8 +10,7 @@
             "VARIANT": "{{ python_version }}-bookworm"
         }
     },
-    "remoteEnv": {
-        {% if self_signed %}// https://github.com/microsoft/vscode-remote-release/issues/6092
+    "remoteEnv": {% raw %}{{% endraw %}{% if self_signed %}// https://github.com/microsoft/vscode-remote-release/issues/6092
         "NODE_TLS_REJECT_UNAUTHORIZED": "0",{% endif %}{% if package_manager == 'poetry' %}
         "POETRY_DYNAMIC_VERSIONING_BYPASS": "1.0.0"{% elif package_manager == 'uv'%}
         "UV_SYSTEM_PYTHON": "1",
