@@ -141,9 +141,7 @@ fallback-version = "1.0.0"
 path = "src/{{ python_package_import_name }}/__about__.py"
 template = '''
 __version__ = "{version}"
-'''
-{% endif %}
-
+'''{% endif %}
 
 [tool.pytest.ini_options]
 minversion = "8.0"

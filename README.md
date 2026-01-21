@@ -16,7 +16,11 @@ A generic python project template based on [`copier`](https://copier.readthedocs
 ## TL;DR
 
 ```bash
-copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-template path/to/destination
+pip install copier
+```
+
+```bash
+copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-template /path/to/destination
 ```
 
 ## Features

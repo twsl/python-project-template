@@ -12,24 +12,24 @@ github_runner:
   - ubuntu-latest
 github_runner_clean: false
 github_runner_python_version:
-  - "3.11"
+  - "3.12"
 include_databricks: false
 include_docs: true
 include_notebooks: true
 include_sample_code: false
 line_ending: lf
-package_manager: uv
-precommit_tool: prek
+package_manager: poetry
+precommit_tool: pre-commit
 primary_branch: main
 project_description: "The python description"
 project_name: example-project
 python_package_command_line_name: example-project
 python_package_distribution_name: example-project
 python_package_import_name: example_project
-python_version: "3.11"
+python_version: "3.12"
 repository_name: example-project
 repository_namespace: twsl
 repository_provider: test.ghe.com
 self_signed: false
-type_checker: ty
+type_checker: pyright
 use_precommit: true

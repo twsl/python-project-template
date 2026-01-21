@@ -13,6 +13,7 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest]
+        answers_file: [".copier-answers-uv.yml", ".copier-answers-poetry.yml"]
     defaults:
       run:
         shell: bash
@@ -50,12 +51,12 @@ jobs:
         run: poetry install --no-interaction
 
       - name: Test
-        run: poetry run copier copy ./ ./dist --data-file "./.github/assets/.copier-answers.yml" -f --vcs-ref=HEAD
+        run: poetry run copier copy ./ ./dist --data-file "./.github/assets/${{ matrix.answers_file }}" -f --vcs-ref=HEAD
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v6
         with:
-          name: copier-results-${{ runner.os }}
+          name: copier-results-${{ runner.os }}-${{ matrix.answers_file }}
           path: ./dist/**/*
           include-hidden-files: true
         if: ${{ always() }}
