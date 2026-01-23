@@ -109,10 +109,10 @@ jobs:
             echo "has_changes=true" >> $GITHUB_OUTPUT
           else
             echo "has_changes=false" >> $GITHUB_OUTPUT
-          fi
+          fi{% endraw %}
 
       - name: Run {{ package_manager }} lock
-        run: {{ package_manager }} lock
+        run: {{ package_manager }} lock{% raw %}
 
       - name: Extract commit from copier answers
         id: copier-commit
