@@ -10,7 +10,9 @@ concurrency:
   cancel-in-progress: true{% endraw %}
 
 env:
-  python-version: "{{ python_version }}"
+  python-version: "{{ python_version }}"{% if package_manager == 'poetry' %}
+  POETRY_DYNAMIC_VERSIONING_BYPASS: "1.0.0"{% elif package_manager == 'uv'%}
+  UV_DYNAMIC_VERSIONING_BYPASS: "1.0.0"{% endif %}
 
 jobs:
   copier-update:
