@@ -111,8 +111,8 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Run poetry lock
-        run: poetry lock
+      - name: Run {{ package_manager }} lock
+        run: {{ package_manager }} lock
 
       - name: Extract commit from copier answers
         id: copier-commit
