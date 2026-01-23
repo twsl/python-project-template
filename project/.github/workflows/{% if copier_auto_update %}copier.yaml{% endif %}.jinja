@@ -62,11 +62,7 @@ jobs:
 
       - name: Build
         run: |
-          poetry build
-
-      - name: Run copier update
-        id: run-update
-        run: poetry run copier update --trust -A --vcs-ref=HEAD{% elif package_manager == 'uv'%}
+          poetry build{% elif package_manager == 'uv'%}
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
@@ -78,11 +74,15 @@ jobs:
         run: uv sync --all-groups --all-extras --frozen
 
       - name: Build dependencies
-        run: uv build
+        run: uv build{%endif %}
+
+      - name: Git Status
+        id: git-status
+        run: git status
 
       - name: Run copier update
         id: run-update
-        run: uv run copier update --trust -A --vcs-ref=HEAD{%endif %}
+        run: {{ package_manager }} run copier update --trust -A --vcs-ref=HEAD
 
       {% raw %}- name: Resolve conflicts with incoming changes
         run: |
