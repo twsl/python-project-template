@@ -76,9 +76,9 @@ jobs:
       - name: Show
         run: ls -l dist/
 
-      {% raw %}# - name: Publish
+      # - name: Publish
       #   run: |
-      #     poetry publish -u "__token__" -p ${{ secrets.PYPI_API_TOKEN }}{% endraw %}
+      #     {{ package_manager }} publish --username "__token__" --password {% raw %}${{ secrets.PYPI_API_TOKEN }}{% endraw %}
 
   upload-packages:
     runs-on: {{ github_runner }}
