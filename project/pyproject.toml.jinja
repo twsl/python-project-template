@@ -140,6 +140,7 @@ vcs = "git"
 style = "semver"
 pattern = "default-unprefixed"
 fallback-version = "1.0.0"
+format = "{base}+{distance}.{commit}"
 
 [tool.hatch.build.hooks.version]
 path = "src/{{ python_package_import_name }}/__about__.py"
