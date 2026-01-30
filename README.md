@@ -77,7 +77,7 @@ You can update the template in your destination folder with:
 copier update --trust -A --vcs-ref=HEAD
 ```
 
-### Develpment
+### Development
 
 The devcontainer is already set up for you, just open the project in VSCode and you will be prompted to open the project in the devcontainer.
 
