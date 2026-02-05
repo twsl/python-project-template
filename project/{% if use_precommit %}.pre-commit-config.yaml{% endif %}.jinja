@@ -21,7 +21,7 @@ repos:
       - id: poetry-lock
       - id: poetry-check{% elif package_manager == 'uv'%}
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.9.29
+    rev: 0.9.30
     hooks:
       - id: uv-lock{% endif %}
 
@@ -77,7 +77,7 @@ repos:
         language: system
         types: [python]{% elif type_checker == 'ty' %}
   - repo: https://github.com/allganize/ty-pre-commit
-    rev: v0.0.14
+    rev: v0.0.15
     hooks:
       - id: ty-check{% endif %}
 
