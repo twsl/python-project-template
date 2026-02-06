@@ -140,7 +140,7 @@ vcs = "git"
 style = "semver"
 pattern = "default-unprefixed"
 fallback-version = "1.0.0"
-format-jinja = "{% if distance == 0 %}{{ base }}{% else %}{{ base }}+{{ distance }}.{{ commit }}{% endif %}"
+{% raw %}format-jinja = "{% if distance == 0 %}{{ base }}{% else %}{{ base }}+{{ distance }}.{{ commit }}{% endif %}"{% endraw %}
 
 [tool.hatch.build.hooks.version]
 path = "src/{{ python_package_import_name }}/__about__.py"
