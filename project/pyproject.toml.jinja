@@ -293,6 +293,7 @@ reportMissingTypeStubs = false{% elif type_checker == 'ty' %}
 [tool.ty.environment]
 python-version = "{{ python_version }}"
 python-platform = "linux"
+python = "/usr/local/bin/python"
 root = ["./src"]{% endif %}
 
 [tool.pre-commit-update.yaml]
