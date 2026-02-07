@@ -56,7 +56,7 @@ dev = [
     "ruff>=0.15.0",
     {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.15"{% endif %},
     "bandit>=1.9.3",{% if use_precommit %}
-    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.1"{% endif %},{% endif %}
+    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.2"{% endif %},{% endif %}
     "vulture>=2.14",
     "copier>=9.11.3",{% if include_notebooks %}
     "ipykernel>=6.31.0",
@@ -87,7 +87,7 @@ docs = [
 ]{% endif %}
 debug = [
     "ipdb>=0.13.9",
-    "line-profiler>=5.0.0",
+    "line-profiler>=5.0.1",
 ]
 
 [project.scripts]
