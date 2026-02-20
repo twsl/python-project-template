@@ -26,8 +26,8 @@ dependencies = [{% if include_sample_code %}
     "lightning>=2.6.1"{% endif %}
 ]
 
-[project.optional-dependencies]
-extra = []
+#[project.optional-dependencies]
+#extra = []
 
 [project.urls]
 homepage = {% if repository_provider == "github.com"%}"https://{{ repository_namespace }}.github.io/{{ repository_name }}/"{% else %}"https://pages.{{ repository_provider }}/{{ repository_namespace }}/{{ repository_name }}"{% endif %}
