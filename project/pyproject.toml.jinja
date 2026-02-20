@@ -53,7 +53,7 @@ default-groups = "all"
 
 [dependency-groups]
 dev = [
-    "ruff>=0.15.1",
+    "ruff>=0.15.2",
     {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.17"{% endif %},
     "bandit>=1.9.3",{% if use_precommit %}
     {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.3"{% endif %},{% endif %}
