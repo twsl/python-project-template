@@ -68,7 +68,7 @@ jobs:
         run: uv build{%endif %}
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         {% raw %}with:
           name: build-${{ github.sha }}
           path: dist/{% endraw %}
@@ -89,7 +89,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Download artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           {% raw %}name: build-${{ github.sha }}
           path: dist/{% endraw %}
