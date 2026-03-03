@@ -54,7 +54,7 @@ default-groups = "all"
 [dependency-groups]
 dev = [
     "ruff>=0.15.4",
-    {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.19"{% endif %},
+    {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.20"{% endif %},
     "bandit>=1.9.4",{% if use_precommit %}
     {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.4"{% endif %},{% endif %}
     "vulture>=2.14",
@@ -75,7 +75,7 @@ test = [
 ]{% if include_docs %}
 docs = [
     "mkdocs>=1.6.1",
-    "mkdocs-material>=9.7.3",
+    "mkdocs-material>=9.7.4",
     "mkdocs-git-revision-date-localized-plugin>=1.5.1",
     "mkdocs-awesome-nav>=3.3.0",
     "mkdocs-git-authors-plugin>=0.10.0",
