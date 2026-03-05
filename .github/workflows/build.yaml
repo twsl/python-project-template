@@ -54,7 +54,7 @@ jobs:
         run: poetry run copier copy ./ ./dist --data-file "./.github/assets/.copier-answers-${{ matrix.answers_variant }}.yml" -f --vcs-ref=HEAD
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: copier-results-${{ runner.os }}-${{ matrix.answers_variant }}
           path: ./dist/**/*
