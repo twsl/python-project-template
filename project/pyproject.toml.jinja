@@ -53,15 +53,15 @@ default-groups = "all"
 
 [dependency-groups]
 dev = [
-    "ruff>=0.15.4",
-    {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.20"{% endif %},
+    "ruff>=0.15.5",
+    {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.21"{% endif %},
     "bandit>=1.9.4",{% if use_precommit %}
     {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.4"{% endif %},{% endif %}
-    "vulture>=2.14",
-    "copier>=9.12.0",{% if include_notebooks %}
+    "vulture>=2.15",
+    "copier>=9.13.0",{% if include_notebooks %}
     "ipykernel>=6.31.0",
     "ipywidgets>=8.1.8",
-    "ipython>=9.10.0",
+    "ipython>=9.11.0",
     "jupytext>=1.19.1",
     "nbconvert>=7.17.0",{% endif %}
 ]
