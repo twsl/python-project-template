@@ -56,7 +56,7 @@ dev = [
     "ruff>=0.15.5",
     {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.21"{% endif %},
     "bandit>=1.9.4",{% if use_precommit %}
-    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.4"{% endif %},{% endif %}
+    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.5"{% endif %},{% endif %}
     "vulture>=2.15",
     "copier>=9.13.0",{% if include_notebooks %}
     "ipykernel>=6.31.0",
@@ -75,7 +75,7 @@ test = [
 ]{% if include_docs %}
 docs = [
     "mkdocs>=1.6.1",
-    "mkdocs-material>=9.7.4",
+    "mkdocs-material>=9.7.5",
     "mkdocs-git-revision-date-localized-plugin>=1.5.1",
     "mkdocs-awesome-nav>=3.3.0",
     "mkdocs-git-authors-plugin>=0.10.0",
