@@ -133,7 +133,7 @@ jobs:
         {% raw %}if: ${{ always() && github.event_name == 'pull_request' && github.event.workflow_run.conclusion != 'skipped' && runner.os == 'Linux' }}{% endraw %}
 
       - name: Add coverage PR comment
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@v3
         {% raw %}with:
           header: Code Coverage ${{ runner.os }} ${{ matrix.python-version }}
           message: |
