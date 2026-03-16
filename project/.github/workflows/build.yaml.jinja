@@ -79,7 +79,7 @@ jobs:
         env:{% elif precommit_tool == 'prek' %}
 
       - name: Run prek
-        uses: j178/prek-action@v1
+        uses: j178/prek-action@v2
         continue-on-error: true
         env:{% endif %}{% endif %}{% if package_manager == 'poetry'%}
           SKIP: poetry-lock
