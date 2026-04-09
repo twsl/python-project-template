@@ -53,7 +53,7 @@ default-groups = "all"
 
 [dependency-groups]
 dev = [
-    "ruff>=0.15.9",
+    "ruff>=0.15.10",
     {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.29"{% endif %},
     "bandit>=1.9.4",{% if use_precommit %}
     {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.3.8"{% endif %},{% endif %}
@@ -63,7 +63,7 @@ dev = [
     "ipywidgets>=8.1.8",
     "ipython>=9.10.1",
     "jupytext>=1.19.1",
-    "nbconvert>=7.17.0",{% endif %}
+    "nbconvert>=7.17.1",{% endif %}
 ]
 test = [
     "pytest>=9.0.3",
