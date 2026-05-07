@@ -9,7 +9,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
-copier = "^9.14.3"
+copier = "^9.15.0"
 
 [build-system]
 requires = ["poetry-core"]
