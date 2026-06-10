@@ -69,17 +69,17 @@ repos:
       - id: ruff-format
 {% if type_checker == 'pyright' %}
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.408
+    rev: v1.1.410
     hooks:
       - id: pyright
         args: [--verbose, --project=.]
         entry: poetry run pyright
         language: system
         types: [python]{% elif type_checker == 'ty' %}
-  - repo: https://github.com/allganize/ty-pre-commit
-    rev: v0.0.46
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    rev: v0.0.47
     hooks:
-      - id: ty-check{% endif %}
+      - id: ty{% endif %}
 
   - repo: https://github.com/jendrikseipp/vulture
     rev: v2.16
