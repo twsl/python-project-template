@@ -54,15 +54,15 @@ default-groups = "all"
 [dependency-groups]
 dev = [
     "ruff>=0.15.18",
-    {% if type_checker == 'pyright' %}"pyright>=1.1.408"{% elif type_checker == 'ty' %}"ty>=0.0.52"{% endif %},
+    {% if type_checker == 'pyright' %}"pyright>=1.1.411"{% elif type_checker == 'ty' %}"ty>=0.0.52"{% endif %},
     "bandit>=1.9.4",{% if use_precommit %}
-    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.4.4"{% endif %},{% endif %}
+    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.4.5"{% endif %},{% endif %}
     "vulture>=2.16",
     "copier>=9.15.2",{% if include_notebooks %}
-    "ipykernel>=7.2.0",
+    "ipykernel>=7.3.0",
     "ipywidgets>=8.1.8",
     "ipython>=9.13.0",
-    "jupytext>=1.19.1",
+    "jupytext>=1.19.3",
     "nbconvert>=7.17.1",{% endif %}
 ]
 test = [
@@ -81,7 +81,7 @@ docs = [
     "mkdocs-git-authors-plugin>=0.10.0",
     "mkapi>=4.5.0",
     "markdown-callouts>=0.4.0",
-    "pymdown-extensions>=10.21.3",
+    "pymdown-extensions>=11.0",
     "pygments>=2.20.0",{% if include_notebooks %}
     "mkdocs-jupyter>=0.26.3",{% endif %}
 ]{% endif %}
