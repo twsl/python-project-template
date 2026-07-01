@@ -16,7 +16,7 @@ repos:
       - id: pre-commit-update
 {% if package_manager == 'poetry' %}
   - repo: https://github.com/python-poetry/poetry
-    rev: 2.3.3
+    rev: 2.4.1
     hooks:
       - id: poetry-lock
       - id: poetry-check{% elif package_manager == 'uv'%}
@@ -62,7 +62,7 @@ repos:
       - id: nbstripout
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.120
+    rev: v0.15.20
     hooks:
       - id: ruff-check
         args: [--fix, -v]
