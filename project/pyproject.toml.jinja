@@ -56,7 +56,7 @@ dev = [
     "ruff>=0.15.20",
     {% if type_checker == 'pyright' %}"pyright>=1.1.411"{% elif type_checker == 'ty' %}"ty>=0.0.55"{% endif %},
     "bandit>=1.9.4",{% if use_precommit %}
-    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.4.5"{% endif %},{% endif %}
+    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.5.0"{% elif precommit_tool == 'prek' %}"prek>=0.4.6"{% endif %},{% endif %}
     "vulture>=2.16",
     "copier>=9.15.2",{% if include_notebooks %}
     "ipykernel>=7.3.0",
@@ -71,7 +71,7 @@ test = [
     "pytest-mock>=3.15.1",
     "pytest-cases>=3.10.1",
     "pytest-benchmark[aspect,histogram]>=5.2.3",
-    "pytest-github-actions-annotate-failures>=0.4.0",
+    "pytest-github-actions-annotate-failures>=0.4.2",
 ]{% if include_docs %}
 docs = [
     "mkdocs>=1.6.1",
