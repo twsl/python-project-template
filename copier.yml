@@ -132,11 +132,11 @@ python_version:
   help: What version of python are you targeting? See https://devguide.python.org/versions/
   default: "3.12"
   choices:
-    - "3.10"
-    - "3.11"
     - "3.12"
     - "3.13"
     - "3.14"
+    - "3.15"
+    - "3.16"
 
 python_package_distribution_name:
   type: str
@@ -233,12 +233,11 @@ github_runner_python_version:
   default: ["{{ python_version }}"]
   multiselect: true
   choices:
-    - "3.9"
-    - "3.10"
-    - "3.11"
     - "3.12"
     - "3.13"
     - "3.14"
+    - "3.15"
+    - "3.16"
   validator: >-
     {% set python_minor = python_version|replace('3.', '')|float %}
     {% set valid_list_length = github_runner_python_version|map('replace', '3.', '')|map("float")|select("ge", python_minor)|list|length%}
