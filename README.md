@@ -28,7 +28,7 @@ copier copy --trust --vcs-ref=HEAD git+https://github.com/twsl/python-project-te
 
 ### Development features
 
-- Supports `Python 3.10` and [higher](https://devguide.python.org/versions/).
+- Supports `Python 3.12` and [higher](https://devguide.python.org/versions/) following [SPEC 0](https://scientific-python.org/specs/spec-0000/).
 - [`uv`](https://github.com/astral-sh/uv) or [`Poetry`](https://python-poetry.org/) as a dependencies manager. See configuration in `pyproject.toml`.
 - Automatic codestyle with [`ruff`](https://github.com/astral-sh/ruff).
 - Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting. Execute with [`prek`](https://github.com/j178/prek) or [`pre-commit`](https://github.com/pre-commit/pre-commit)
