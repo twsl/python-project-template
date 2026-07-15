@@ -84,7 +84,7 @@ jobs:
 
       - name: Run copier update
         id: run-update
-        run: {{ package_manager }} run copier update --trust -A --vcs-ref=HEAD
+        run: {{ package_manager }} run copier update --trust -A --vcs-ref=HEAD --defaults
 
       {% raw %}- name: Resolve conflicts with incoming changes
         run: |
