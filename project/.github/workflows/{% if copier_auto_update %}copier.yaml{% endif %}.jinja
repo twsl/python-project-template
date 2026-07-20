@@ -33,7 +33,7 @@ jobs:
         uses: twsl/gha-free-disk-space@main{% endif %}
 
       {% raw %}- name: Set up Python ${{ env.python-version }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: ${{ env.python-version }}{% endraw %}{% if package_manager == 'poetry' %}
 
