@@ -62,7 +62,7 @@ repos:
       - id: nbstripout
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.21
+    rev: v0.15.22
     hooks:
       - id: ruff-check
         args: [--fix, -v]
@@ -77,7 +77,7 @@ repos:
         language: system
         types: [python]{% elif type_checker == 'ty' %}
   - repo: https://github.com/astral-sh/ty-pre-commit
-    rev: v0.0.59
+    rev: v0.0.61
     hooks:
       - id: ty{% endif %}
 
