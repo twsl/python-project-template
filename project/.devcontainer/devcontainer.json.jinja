@@ -10,8 +10,9 @@
             "VARIANT": "{{ python_version }}-trixie"
         }
     },
-    "remoteEnv": {% raw %}{{% endraw %}{% if self_signed %}// https://github.com/microsoft/vscode-remote-release/issues/6092
-        "NODE_TLS_REJECT_UNAUTHORIZED": "0",{% endif %}{% if package_manager == 'poetry' %}
+    "remoteEnv": {% raw %}{{% endraw %}
+        "CODEGRAPH_TELEMETRY": "0",{% if self_signed %}
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0", // https://github.com/microsoft/vscode-remote-release/issues/6092{% endif %}{% if package_manager == 'poetry' %}
         "POETRY_DYNAMIC_VERSIONING_BYPASS": "1.0.0"{% elif package_manager == 'uv'%}
         "UV_SYSTEM_PYTHON": "1",
         "UV_PROJECT_ENVIRONMENT": "/usr/local",
@@ -33,7 +34,7 @@
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "{% if package_manager == 'poetry' %}poetry install{% elif package_manager == 'uv'%}uv sync --all-groups --all-extras{% endif %}",
-    "postStartCommand": "{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}pre-commit install{% elif precommit_tool == 'prek' %}{% if package_manager == 'uv'%}uv tool install prek && {% endif %}prek install{% endif %}{% endif %}",
+    "postStartCommand": "sh ./scripts/llm.sh{% if use_precommit %} && {% if precommit_tool == 'pre-commit' %}pre-commit install{% elif precommit_tool == 'prek' %}{% if package_manager == 'uv'%}uv tool install prek && {% endif %}prek install{% endif %}{% endif %}",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
