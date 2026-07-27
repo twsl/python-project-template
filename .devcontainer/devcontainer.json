@@ -7,7 +7,7 @@
         "dockerfile": "Dockerfile",
         "context": "..",
         "args": {
-            "VARIANT": "3.11-bookworm"
+            "VARIANT": "3.12-trixie"
         }
     },
     "remoteEnv": {
@@ -19,9 +19,8 @@
         "ghcr.io/devcontainers-extra/features/actionlint:1": {},
         "ghcr.io/devcontainers-extra/features/pre-commit:2": {},
         "ghcr.io/dhoeric/features/act:1": {},
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            "version": "latest",
-            "moby": true
+        "ghcr.io/devcontainers/features/docker-in-docker:4": {
+            "moby": false
         }
     },
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -84,7 +83,10 @@
                 "autoDocstring.generateDocstringOnEnter": true,
                 "autoDocstring.startOnNewLine": true,
                 "http.proxyStrictSSL": false, // required for self signed certificates
-                "telemetry.telemetryLevel": "off"
+                "telemetry.telemetryLevel": "off",
+                "files.eol": "\n",
+                "code-eol.highlightNonDefault": true,
+                "code-eol.highlightExtraWhitespace": true
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
