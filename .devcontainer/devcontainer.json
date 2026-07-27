@@ -93,8 +93,6 @@
                 "ms-python.python",
                 "ms-python.vscode-pylance",
                 "ms-toolsai.jupyter",
-                "visualstudioexptteam.vscodeintellicode",
-                "VisualStudioExptTeam.vscodeintellicode-completions",
                 "GitHub.copilot",
                 "GitHub.copilot-chat",
                 "charliermarsh.ruff",
