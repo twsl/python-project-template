@@ -34,8 +34,8 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "{% if package_manager == 'poetry' %}poetry install{% elif package_manager == 'uv'%}uv sync --all-groups --all-extras{% endif %}",
-    "postStartCommand": "sh ./scripts/llm.sh{% if use_precommit %} && {% if precommit_tool == 'pre-commit' %}pre-commit install{% elif precommit_tool == 'prek' %}{% if package_manager == 'uv'%}uv tool install prek && {% endif %}prek install{% endif %}{% endif %}",
+    "postCreateCommand": "{% if package_manager == 'poetry' %}poetry install{% elif package_manager == 'uv'%}uv sync --all-groups --all-extras{% endif %} && sh ./scripts/llm.sh",
+    "postStartCommand": "{% if use_precommit %}{% if precommit_tool == 'pre-commit' %}pre-commit install{% elif precommit_tool == 'prek' %}{% if package_manager == 'uv'%}uv tool install prek && {% endif %}prek install{% endif %}{% endif %}",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
