@@ -56,7 +56,7 @@ dev = [
     "ruff>=0.17.2",
     {% if type_checker == 'pyright' %}"pyright>=1.1.411"{% elif type_checker == 'ty' %}"ty>=0.0.91"{% endif %},
     "bandit>=1.9.4",{% if use_precommit %}
-    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.6.1"{% elif precommit_tool == 'prek' %}"prek>=0.5.3"{% endif %},{% endif %}
+    {% if precommit_tool == 'pre-commit' %}"pre-commit>=4.6.1"{% elif precommit_tool == 'prek' %}"prek>=0.5.7"{% endif %},{% endif %}
     "vulture>=2.16",
     "copier>=9.18.2",{% if include_notebooks %}
     "ipykernel>=7.3.0",
