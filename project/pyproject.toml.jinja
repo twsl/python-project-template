@@ -75,18 +75,18 @@ test = [
 ]{% if include_docs %}
 docs = [
     "mkdocs>=1.6.1",
-    "mkdocs-material>=9.7.7",
-    "mkdocs-git-revision-date-localized-plugin>=1.6.0",
+    "mkdocs-material>=9.8.0",
+    "mkdocs-git-revision-date-localized-plugin>=1.6.2",
     "mkdocs-awesome-nav>=3.3.0",
     "mkdocs-git-authors-plugin>=0.10.0",
     "mkapi>=4.5.0",
     "markdown-callouts>=0.4.0",
     "pymdown-extensions>=12.3",
-    "pygments>=2.20.0",{% if include_notebooks %}
-    "mkdocs-jupyter>=0.26.3",{% endif %}
+    "pygments>=2.21.0",{% if include_notebooks %}
+    "mkdocs-jupyter>=0.27.0",{% endif %}
 ]{% endif %}
 debug = [
-    "ipdb>=0.13.9",
+    "ipdb>=0.13.13",
     "line-profiler>=5.1.0",
 ]
 
