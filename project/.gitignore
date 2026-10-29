@@ -171,5 +171,8 @@ cython_debug/
 # documentation build folder
 _build/
 
+# benchmarks
+.benchmarks/
+
 # codegraph
 .codegraph/
