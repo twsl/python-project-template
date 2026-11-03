@@ -1,16 +1,14 @@
-[tool.poetry]
+[project]
 name = "python-project-template"
 version = "0.1.0"
 description = "A generic python repository template"
-authors = ["twsl <45483159+twsl@users.noreply.github.com>"]
+authors = [{ name = "twsl", email = "45483159+twsl@users.noreply.github.com" }]
 license = "MIT"
 readme = "README.md"
-package-mode = false
+requires-python = ">=3.12"
+dependencies = [
+    "copier>=9.19.1",
+]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-copier = "^9.19.1"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+package = false

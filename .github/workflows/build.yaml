@@ -29,29 +29,17 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
         with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-          virtualenvs-path: .venv
-
-      - name: Add poetry to path
-        run: echo "$(poetry env info --path)/bin" >> $GITHUB_PATH
-
-      - name: Set up cache
-        uses: actions/cache@v6
-        id: cached-poetry-dependencies
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('poetry.lock') }}
+          enable-cache: true
+          cache-dependency-glob: "**/uv.lock"
 
       - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction
+        run: uv sync --all-groups --all-extras --frozen
 
       - name: Test
-        run: poetry run copier copy ./ ./dist --data-file "./.github/assets/.copier-answers-${{ matrix.answers_variant }}.yml" -f --vcs-ref=HEAD
+        run: uv run copier copy ./ ./dist --data-file "./.github/assets/.copier-answers-${{ matrix.answers_variant }}.yml" -f --vcs-ref=HEAD
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v7
