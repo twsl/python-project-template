@@ -22,6 +22,6 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 RUN echo 'eval "$(uv generate-shell-completion bash)"' >> ~/.bashrc \
     && echo 'eval "$(uvx --generate-shell-completion bash)"' >> ~/.bashrc{% endif %}
 
-mkdir -p $HOME/.copilot/otel
+mkdir -p /root/.copilot/otel
 
 {% if self_signed %}RUN echo "--insecure" > ~/.curlrc{% endif %}
