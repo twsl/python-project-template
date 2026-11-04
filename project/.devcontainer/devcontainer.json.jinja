@@ -14,7 +14,7 @@
         "RTK_TELEMETRY_DISABLED": "1",
         "CODEGRAPH_TELEMETRY": "0",
         "COPILOT_OTEL_ENABLED": "true",
-        "COPILOT_OTEL_EXPORTER_TYPE": "true",
+        "COPILOT_OTEL_EXPORTER_TYPE": "file",
         "COPILOT_OTEL_FILE_EXPORTER_PATH": "/root/.copilot/otel/copilot-otel.jsonl",{% if self_signed %}
         "NODE_TLS_REJECT_UNAUTHORIZED": "0", // https://github.com/microsoft/vscode-remote-release/issues/6092{% endif %}{% if package_manager == 'poetry' %}
         "POETRY_DYNAMIC_VERSIONING_BYPASS": "1.0.0"{% elif package_manager == 'uv'%}
