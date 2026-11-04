@@ -2,8 +2,6 @@
 
 export PATH="$HOME/.local/bin:$PATH"
 
-mkdir -p $HOME/.copilot/otel
-
 curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | bash
 
 curl -fsSL https://raw.githubusercontent.com/colbymchenry/codegraph/main/install.sh | bash
