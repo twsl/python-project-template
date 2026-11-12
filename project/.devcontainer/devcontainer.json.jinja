@@ -10,6 +10,11 @@
             "VARIANT": "{{ python_version }}-trixie"
         }
     },
+    "initializeCommand": "test -f .env || touch .env",
+    "runArgs": [
+        "--env-file",
+        ".env"
+    ],
     "remoteEnv": {% raw %}{{% endraw %}
         "RTK_TELEMETRY_DISABLED": "1",
         "CODEGRAPH_TELEMETRY": "0",
